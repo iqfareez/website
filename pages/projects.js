@@ -1,6 +1,6 @@
 import siteMetadata from '@/data/siteMetadata'
 import projectsDataHighlights from '@/data/projects/highlight'
-import projectsDataAndroid from '@/data/projects/android'
+import projectsDataApps from '@/data/projects/apps'
 import Card from '@/components/Card'
 import { PageSEO } from '@/components/SEO'
 
@@ -33,11 +33,11 @@ export default function Projects() {
         </div>
       </div>
       <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-10 md:text-3xl md:leading-14">
-        Android app
+        Apps
       </h2>
       <div className="container py-12">
         <div className="-m-4 flex flex-wrap">
-          {projectsDataAndroid.map((d) => (
+          {projectsDataApps.map((d) => (
             <Card
               key={d.title}
               title={d.title}
