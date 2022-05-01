@@ -19,6 +19,12 @@ const projectsDataApps = [
     imgSrc: '/static/images/projects/people-space.png',
     href: 'https://github.com/iqfareez/people_in_space',
   },
+  {
+    title: 'More apps',
+    description: 'Visit my Google Play developer page',
+    imgSrc: '/static/images/projects/more-on-google-play.png',
+    href: 'https://play.google.com/store/apps/dev?id=9200064795631584674',
+  },
 ]
 
 export default projectsDataApps
