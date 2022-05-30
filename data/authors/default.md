@@ -3,7 +3,7 @@ name: Muhammad Fareez Iqmal
 avatar: /static/images/avatar.png
 occupation: Engineering Student
 company: International Islamic University Malaysia
-email: m.fareez.iqmal@gmail.com
+email: hello@iqfareez.com
 twitter: https://twitter.com/iqfareez
 linkedin: https://www.linkedin.com/iqfareez
 github: https://github.com/iqfareez
