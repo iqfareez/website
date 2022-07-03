@@ -6,9 +6,14 @@ draft: false
 summary: Login to Wifi captive portal the unusual ways
 ---
 
+import Admonition from 'react-admonitions'
+
 When building IoT projects, the quickest way is to connect them to our mobile hotspot. But, to some extent. What if we want the project to be deployed somewhere else? For sure, it is not very convenient to put our phones together with the project. In my case, when we want to deploy [the Parcel Safety Box project](../projects/), the only public wifi available is the campus wifi.
 
-Heads up, this article is not about actually hacking the portal, i.e., bypassing the security etc. You'll still need your username & password or any other valid credentials.
+<Admonition type="note">
+  This article is not about actually hacking the portal, i.e., bypassing the security etc. You'll
+  still need to have your username & password or any other valid credentials.
+</Admonition>
 
 It is not straightforward as plugging the SSID and password of the campus Wifi network. They usually have another layer of authentication called a captive portal. According to [techtarget.com](https://www.techtarget.com/searchmobilecomputing/definition/captive-portal), **captive portal a web page that the user of a public-access network is obliged to view and interact with before access is granted**. The example below is the captive portal of my campus wifi: `IIUM-Student`.
 
@@ -60,7 +65,9 @@ Now, check the Network tab we've opened earlier. As you've noticed, there is a l
 
 These requests will be likely to occur earlier in the timeline, so scroll up. In the **Name** column, look for something called `login` or something similar.
 
-💡 **Tip:** Look for a `POST` method. But it is not always the case (I think)
+<Admonition type="tip">
+  Look for a `POST` method. But it is not always the case (I think)
+</Admonition>
 
 ![Network activity inspection](/static/blog/hack-wifi/network-login-inspection.png)
 
@@ -85,7 +92,11 @@ In Insomnia, create a **New Request**, then paste in the empty text box to impor
 
 ![Insomnia paste cURL](/static/blog/hack-wifi/insomnia-paste.png)
 
-⚠️ Attention: Some characters are automatically url-encoded after pasting. Be sure to change it to normal text. Example: Your password is `s@ample`, but in insomnia, it becomes `s%40mple`. Be sure to edit it to become the original text.
+<Admonition type="important" title="Do not do this">
+  Some characters are automatically url-encoded after pasting. Be sure to change it to normal text.
+  Example: Your password is `s@ample`, but in insomnia, it becomes `s%40mple`. Be sure to edit it to
+  become the original text.
+</Admonition>
 
 To test it, **logout** from the network, perhaps by clicking the logout button (if available), or by disconnecting and connecting back to the wifi (not sure if this can work). _You might need to change the site's permission to allow **Pop-ups**_
 
@@ -103,7 +114,9 @@ Remember that our main purpose is to implement this login method to the microcon
 
 Start by using the **trial and error** method to turn one parameter off and test the POST request. If the request is successful, that indicates that the parameter is safe to be turned off. Then repeat with other paramaters.
 
-ℹ️ **Info:** **"Turning off"** here means the parameter is not sent to the server.
+<Admonition type="note" title="INFO">
+  **"Turning off"** here means the parameter is not sent to the server.
+</Admonition>
 
 I discovered that the `url` parameter can be safely turned off. All the headers also are not necessary.
 
