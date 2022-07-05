@@ -3,14 +3,15 @@ title: "'Hacking' the Wifi captive portal (Part 1)"
 date: '2022-07-5'
 tags: ['tutorial', 'wifi', 'iot', 'esp32']
 draft: false
-summary: Login to Wifi captive portal the unusual ways
+summary: Login to Wifi captive portal the unusual way
+images: ['/static/blog/hack-wifi/hamed-taha-NEqR20e6eY4-unsplash.jpg']
 ---
 
 import Admonition from 'react-admonitions'
 
-When building IoT projects, the quickest way is to connect them to our mobile hotspot. But, to some extent. What if we want the project to be deployed somewhere else? For sure, it is not very convenient to put our phones together with the project. In my case, when we want to deploy [the Parcel Safety Box project](../projects/), the only public wifi available is the campus wifi.
+When building IoT projects, the quickest way to connect to the internet is by using our mobile hotspot. But, what if we want the project to be deployed somewhere else? For sure, it is not very convenient to put our phones together with the project. In my case, when we want to deploy [the Parcel Safety Box project](../projects/), the only public wifi available is the campus wifi.
 
-<Admonition type="note">
+<Admonition type="note" title="Note that">
   This article is not about actually hacking the portal, i.e., bypassing the security etc. You'll
   still need to have your username & password or any other valid credentials.
 </Admonition>
@@ -19,7 +20,7 @@ It is not straightforward as plugging the SSID and password of the campus Wifi n
 
 ![IIUM-Student-Captive-Portal](/static/blog/hack-wifi/wifiportal.png)
 
-While there is no problem logging into the wifi network when you have a laptop or phone, [**microcontrollers**](https://www.espressif.com/en/products/socs/esp32), on the other hand, are a different story. It doesn't have a GUI environment, let alone a web browser to access the portal. After some attempts with a different approach, I found a way to authenticate ourselves to the wifi without a web browser.
+While there is no hassle to log in when you have a laptop or phone, [**microcontrollers**](https://www.espressif.com/en/products/socs/esp32), on the other hand, are a different story. It doesn't have a GUI environment, let alone a web browser to access the portal. After some attempts with a different approach, I found a way to authenticate ourselves to the wifi without a web browser.
 
 We are going to use the ESP32 microcontroller throughout this article
 
@@ -131,7 +132,9 @@ By doing so, you have simplified the request payload needed to complete the requ
 
 ### Now to the ESP32
 
-<Admonition type="note">You can also use ESP8266 etc.</Admonition>
+<Admonition type="note">
+  You can also use ESP8266 etc. Modification with the code may be required.
+</Admonition>
 
 I hope you're already familiar to program the esp. If this is your first time, please do the necessary setup first.
 
@@ -203,7 +206,7 @@ Serial.println(http.getString()); // api response
 delay(2000);
 ```
 
-Full code: https://gist.github.com/iqfareez/4861c6e5dc76c1190d8b1651def13d37
+Full code [here](https://gist.github.com/iqfareez/4861c6e5dc76c1190d8b1651def13d37)
 
 Now, it's time to upload the sketch to your ESP32. Make sure to select the correct COM port etc. and hit that **upload** button.
 
@@ -226,4 +229,4 @@ Open the **Serial Monitor** to see the result (be sure to select the correct bau
 
 Just in case you want to log out, you can use this [code](https://gist.github.com/iqfareez/2c684bfd42d96263a3d96bab8251a088).
 
-In the upcoming part 2 article, we will see how to use this log in trick using laptop or phone to ease log in.
+In the upcoming Part 2 of this article, we will see how to use this log in trick using a laptop or phone to ease log in.
