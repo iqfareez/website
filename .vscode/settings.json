@@ -1,0 +1,9 @@
+{
+  "grammarly.selectors": [
+    {
+      "language": "mdx",
+      "scheme": "file",
+      "pattern": "data/blog/hacking-wifi-captive-portal-1.mdx"
+    }
+  ]
+}
