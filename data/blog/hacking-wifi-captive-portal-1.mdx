@@ -4,7 +4,7 @@ date: '2022-07-5'
 tags: ['tutorial', 'wifi', 'iot', 'esp32']
 draft: false
 summary: Login to Wifi captive portal the unusual way
-images: ['/static/blog/hack-wifi/hamed-taha-NEqR20e6eY4-unsplash.jpg']
+images: ['/static/blog/hack-wifi/meta-image-wifi-article.png']
 ---
 
 import Admonition from 'react-admonitions'
@@ -16,7 +16,7 @@ When building IoT projects, the quickest way to connect to the internet is by us
   still need to have your username & password or any other valid credentials.
 </Admonition>
 
-It is not straightforward as plugging the SSID and password of the campus Wifi network. They usually have another layer of authentication called a captive portal. According to [techtarget.com](https://www.techtarget.com/searchmobilecomputing/definition/captive-portal), **captive portal a web page that the user of a public-access network is obliged to view and interact with before access is granted**. The example below is the captive portal of my campus wifi: `IIUM-Student`.
+It is not straightforward as plugging the SSID and password of the campus Wifi network. They usually have another layer of authentication called a captive portal. According to [techtarget.com](https://www.techtarget.com/searchmobilecomputing/definition/captive-portal), **captive portal is a web page that the user of a public-access network is obliged to view and interact with before access is granted**. The example below is the captive portal of my campus wifi: `IIUM-Student`.
 
 ![IIUM-Student-Captive-Portal](/static/blog/hack-wifi/wifiportal.png)
 
@@ -116,7 +116,7 @@ Now, back in Insomnia, click the **Send** button. After a few seconds, the serve
 
 Remember that our main purpose is to implement this login method to the microcontrollers. So, we need to cut down the unnecessary data to reduce the memory footprint for the mcu's cpu.
 
-Start by using the **trial and error** method to turn one parameter off and test the POST request. If the request is successful, that indicates that the parameter is safe to be turned off. Then repeat with other paramaters.
+Start by using the **trial and error** method to turn one parameter off and test the POST request. If the request is successful, that indicates that the parameter is safe to be turned off. Then repeat with other parameters.
 
 <Admonition type="note" title="INFO">
   **"Turning off"** here means the parameter is not sent to the server.
