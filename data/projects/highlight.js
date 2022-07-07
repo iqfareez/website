@@ -4,7 +4,6 @@ const projectsDataHighlights = [
     description: `Prayer time application for Malaysian to quickly view their solah time. Azan
     will be played during prayer time. Other useful features including monthly prayer timetable, 
     qibla compass, tasbih and many more.`,
-    // imgSrc: '/static/images/google.png',
     imgSrc: '/static/images/projects/mptsolat.png',
     href: 'https://github.com/iqfareez/app_waktu_solat_malaysia',
   },
