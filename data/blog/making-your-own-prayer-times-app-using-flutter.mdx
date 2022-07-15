@@ -1,0 +1,99 @@
+---
+title: Making your own prayer times app using Flutter
+date: '2022-07-15'
+tags: ['tutorial', 'app', 'flutter', 'dart']
+draft: false
+summary: Learn about REST API requests, building UI, exploring Flutter widgets' and more.
+images: ['/static/blog/waktu-solat-tutorial/IMG_20200811_203714.jpg']
+layout: PostLayout
+canonicalUrl: https://iqfareez.com/blog/todo
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+
+## Preparing your app
+
+<Admonition type="note">
+  First, you'll need a Flutter ready on your machine. This part will not be covered in this article.
+  You can read the [official documentation](https://docs.flutter.dev/get-started/install) or go to
+  YouTube to help you kick off. Next, you'll need an IDE, or in other words, a place to write and
+  debug your code. I'll be using [Visual Studio Code](https://code.visualstudio.com) for this
+  tutorial (not to be confused with [Microsoft Visual
+  Studio](https://visualstudio.microsoft.com/vs/)).
+</Admonition>
+
+Create a new Flutter project in your IDE.
+
+```powershell
+flutter create my_solat_app
+```
+
+Add this packages to your `pubspec.yaml` file: `http`
+
+Then, open `lib/main.dart` and clear up the template. It should look like this
+
+```dart:main.dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Prayer Time',
+      theme: ThemeData(
+        primarySwatch: Colors.blue
+      ),
+      home:
+    );
+  }
+}
+```
+
+In the lib folder, create a new dart file called `home.dart`. Then, create a new Stateless Widget and name it as `Home`.
+
+```dart:home.dart
+import 'package:flutter/material.dart';
+
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Home'),
+      ],
+    );
+  }
+}
+```
+
+## Using API
+
+To display the prayer time, we need some sources that we can depend on to get the prayer time. There are many services/organization that offers some API for us, the developers, to use to query some data.
+
+In this tutorial, I'm going to use an international prayer times api, from [Aladhan](https://api.aladhan.com/).
+
+From the documentation, they has a few endpoints that we can use to get the prayer time. We will use the basic `Prayer Times Calendar ` endpoint.
+
+We need to supply few parameters to it such as `latitude`, `longitude`, `method`, `month`, `year` and so on.
+
+Try to copy and paste this API call to your browser, and see the results returned by the API.
+
+    ```
+    http://api.aladhan.com/v1/calendar?latitude=3.253502&longitude=101.653328&method=2&month=7&year=2022
+    ```
+
+You can the coordinate of your places from https://www.latlong.net, try replacing the `latitude` and `longitude` above.
+
+<Admonition type="tip">
+  fmho, I do think it is best to use our local API if you want to deliver the app specific to your
+  country.
+</Admonition>
