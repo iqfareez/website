@@ -1,5 +1,5 @@
 ---
-title: Making your own prayer times app using Flutter
+title: Develop your own prayer times app using Flutter
 date: '2022-07-15'
 tags: ['tutorial', 'app', 'flutter', 'dart']
 draft: false
@@ -12,14 +12,17 @@ authors: ['default']
 
 import Admonition from 'react-admonitions'
 
+We, as a Muslim, often need to know the time of the prayer. Perhaps to plan the day or want to know the time to break the fast. There are many website and apps that we can use, but, what's more interesting is to **make our own app** and let people to use it. Perhaps it will become our jariah, Inshallah.
+
+In this article, I'm going to show you how to build a the app using **Flutter & Dart**. I also will cover about **API**, **HTTP Request**, **GPS** and many more. Let's dive in.
+
 ## Preparing your app
 
 <Admonition type="note">
-  First, you'll need a Flutter ready on your machine. This part will not be covered in this article.
-  You can read the [official documentation](https://docs.flutter.dev/get-started/install) or go to
-  YouTube to help you kick off. Next, you'll need an IDE, or in other words, a place to write and
-  debug your code. I'll be using [Visual Studio Code](https://code.visualstudio.com) for this
-  tutorial (not to be confused with [Microsoft Visual
+  Please familiarize yourself with Flutter first. This will not be covered in this article. You can
+  read the [official documentation](https://docs.flutter.dev/get-started/install) or go to YouTube
+  to help you kick off. For the IDE, I'll be using [Visual Studio
+  Code](https://code.visualstudio.com) for this tutorial (not to be confused with [Microsoft Visual
   Studio](https://visualstudio.microsoft.com/vs/)).
 </Admonition>
 
@@ -29,7 +32,14 @@ Create a new Flutter project in your IDE.
 flutter create my_solat_app
 ```
 
-Add this packages to your `pubspec.yaml` file: `http`
+Add this packages to your `pubspec.yaml` file:
+
+- [http](https://pub.dev/packages/http)
+- [geolocator](https://pub.dev/packages/geolocator).
+
+```powershell
+flutter pub add http geolocator
+```
 
 Then, open `lib/main.dart` and clear up the template. It should look like this
 
@@ -77,23 +87,35 @@ class Home extends StatelessWidget {
 
 ## Using API
 
-To display the prayer time, we need some sources that we can depend on to get the prayer time. There are many services/organization that offers some API for us, the developers, to use to query some data.
+Now, put aside the Flutter things first. To display the prayer time in the app, we need some sources that we can depend on to get the prayer time. There are many services/organization that offers some API for us, the developers, to use to query some data.
 
 In this tutorial, I'm going to use an international prayer times api, from [Aladhan](https://api.aladhan.com/).
 
-From the documentation, they has a few endpoints that we can use to get the prayer time. We will use the basic `Prayer Times Calendar ` endpoint.
+From the documentation, they has a few endpoints that we can use to get the prayer time. We will use the basic `Prayer Times Calendar` endpoint.
 
 We need to supply few parameters to it such as `latitude`, `longitude`, `method`, `month`, `year` and so on.
 
 Try to copy and paste this API call to your browser, and see the results returned by the API.
 
-    ```
-    http://api.aladhan.com/v1/calendar?latitude=3.253502&longitude=101.653328&method=2&month=7&year=2022
-    ```
+```
+http://api.aladhan.com/v1/calendar?latitude=3.253502&longitude=101.653328&method=2&month=7&year=2022
+```
 
-You can the coordinate of your places from https://www.latlong.net, try replacing the `latitude` and `longitude` above.
+You can use extention ([JSON Viewer Pro](https://chrome.google.com/webstore/detail/json-viewer-pro/eifflpmocdbdmepbjaopkkhbfmdgijcc) for example), to pretty print the JSON in your browser.
+
+![json-api-response](/static/blog/waktu-solat-tutorial/apijson_frame_generic_dark.png)
+
+What are you seeing is the reply from the API formatted in **JSON format**. Well, you might ask:
+
+> What is JSON?
+
+In simple word, JSON is a format that understandable by the machine and at the same time readable by the human. Most API will likely use JSON. Details can be found [here](https://www.json.org/).
+
+You can get the **coordinate** of your place from https://www.latlong.net, try replacing the `latitude` and `longitude` value from URL above.
 
 <Admonition type="tip">
-  fmho, I do think it is best to use our local API if you want to deliver the app specific to your
-  country.
+  fmho, I do think it is best to use your local API if you want to deliver the app specific to your
+  country. For **Malaysian**, [these](https://github.com/iqfareez/app_waktu_solat_malaysia/#api) are
+  the API(s) that I'm using the the [Malaysia Prayer Time
+  app](https://play.google.com/store/apps/details?id=live.iqfareez.waktusolatmalaysia).
 </Admonition>
