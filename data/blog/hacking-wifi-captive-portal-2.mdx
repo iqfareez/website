@@ -1,0 +1,53 @@
+---
+title: "'Hacking' the Wifi captive portal (Part 2)"
+date: '2022-07-20'
+tags: ['tutorial', 'wifi', 'android', 'windows', 'automation']
+draft: false
+summary: Quick login the wifi captive portal without a web browser
+images: []
+layout: PostLayout
+canonicalUrl: https://canonicalurl
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+
+In this article, I'm going to share on how you can log in to the captive portal with just **one click**. No need to open a web browser just to waste your time typing down your username and password everytime you need to do so.
+
+If you have no idea about what is Captive Portal, hacking wifi and so on, do have a read the [first part](hacking-wifi-captive-portal-1) of this article.
+
+![Desktop shortcut login wifi](/static/blog/hack-wifi-2/shortcut_login_iium.jpg)
+
+## Basic principles
+
+First, we understand that by make a **POST request** with correct credentials will [authenticate ourselves](hacking-wifi-captive-portal-1#testing-and-verifying) to the wifi. So, the idea is to make a shortcut that can make the request.
+
+## Making shorcuts
+
+The platform I'm going to cover is for Windows and Android, and of course, this method can also be extended to other platforms.
+
+### Microsoft Windows
+
+We are going to use Powershell script since it has a method `Invoke-Request` to make the http requests.
+
+First, open **Windows Powershell ISE**.
+
+A new empty file will appear (if not, go to `File` > `New`. Paste this code:
+
+TODO letak generate code from iNSOMNIA sbb tiap2 org lain2
+
+```powershell
+Invoke-WebRequest -Uri 'https://captiveportalmahallahgombak.iium.edu.my/cgi-bin/login' -Method POST -Body 'user=191XXX&password=YOURPASSWORD&cmd=authenticate&Login=Log%2BIn'
+```
+
+Change the **request URL** accordingly. Also, replace the username `191XXX` and password `YOURPASSWORD` with **your username and password**.
+
+**Save the file**, take note the folder and filename you save into. I save it in **Documents** folder as `wifilogin.ps1`.
+
+### Android
+
+Download [**HTTP Request Shortcut**](https://play.google.com/store/apps/details?id=ch.rmy.android.http_shortcuts) app from the Google Play.
+
+## Concluding remarks
+
+You can also set the script to run every time your computer boot, so that you'll have a continuous access to the wifi network.
