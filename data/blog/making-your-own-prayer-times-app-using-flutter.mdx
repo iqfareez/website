@@ -16,7 +16,7 @@ We, as a Muslim, often need to know the time of the prayer. Perhaps to plan the 
 
 In this article, I'm going to show you how to build a the app using **Flutter & Dart**. I also will cover about **API**, **HTTP Request**, **GPS** and many more. Let's dive in.
 
-## Preparing your app
+## Preparing the app
 
 <Admonition type="note">
   Please familiarize yourself with Flutter first. This will not be covered in this article. You can
@@ -119,3 +119,25 @@ You can get the **coordinate** of your place from https://www.latlong.net, try r
   the API(s) that I'm using the the [Malaysia Prayer Time
   app](https://play.google.com/store/apps/details?id=live.iqfareez.waktusolatmalaysia).
 </Admonition>
+
+## Getting GPS coordinate from app
+
+Remember we've added the geolocator package [early](#preparing-the-app)? Now, we are going to use that package to get our current location. This GPS location will then be supplied to the API.
+
+According to their [readme](https://pub.dev/packages/geolocator#usage), some platform you're targetting may require some additional setups. But here I'm going to only show for the **Android** platform.
+
+### Geolocator Android setup
+
+Open the `android/app/build.gradle` file, go to the `android` blog and set the `compileSdkVersion` to `33`.
+
+```gradle:build.gradle {4}
+...
+
+android {
+    compileSdkVersion 33
+    ndkVersion flutter.ndkVersion
+
+...
+```
+
+Next, create a new file and folder and name it as blahblablahblahhhh
