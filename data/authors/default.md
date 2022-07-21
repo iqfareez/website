@@ -5,7 +5,7 @@ occupation: Engineering Student
 company: International Islamic University Malaysia
 email: hello@iqfareez.com
 twitter: https://twitter.com/iqfareez
-linkedin: https://www.linkedin.com/iqfareez
+linkedin: https://www.linkedin.com/in/iqfareez
 github: https://github.com/iqfareez
 ---
 
