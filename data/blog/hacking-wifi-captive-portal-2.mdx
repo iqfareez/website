@@ -6,7 +6,7 @@ draft: false
 summary: Quick login the wifi captive portal without a web browser
 images: []
 layout: PostLayout
-canonicalUrl: https://canonicalurl
+canonicalUrl: https://iqfareez.com/blog/hacking-wifi-captive-portal-2
 authors: ['default']
 ---
 
@@ -20,34 +20,119 @@ If you have no idea about what is Captive Portal, hacking wifi and so on, do hav
 
 ## Basic principles
 
-First, we understand that by make a **POST request** with correct credentials will [authenticate ourselves](hacking-wifi-captive-portal-1#testing-and-verifying) to the wifi. So, the idea is to make a shortcut that can make the request.
+We understand that by make a **POST request** with correct credentials will [authenticate ourselves](hacking-wifi-captive-portal-1#testing-and-verifying) to the wifi. So, the idea is to make a shortcut that can make the request.
 
-## Making shorcuts
-
-The platform I'm going to cover is for Windows and Android, and of course, this method can also be extended to other platforms.
+The platform I'm going to cover is for [Windows](#windows) and [Android](#android). But no worries, as this method can be easily adopted to other platforms.
 
 ### Microsoft Windows
 
 We are going to use Powershell script since it has a method `Invoke-Request` to make the http requests.
 
+#### Preparing a Powershell script using Powershell ISE
+
 First, open **Windows Powershell ISE**.
 
-A new empty file will appear (if not, go to `File` > `New`. Paste this code:
+A new empty file will appear (if not, go to `File` > `New`.
 
-TODO letak generate code from iNSOMNIA sbb tiap2 org lain2
+Open Insomnia, right click on your request and click on **Generate code**.
 
-```powershell
-Invoke-WebRequest -Uri 'https://captiveportalmahallahgombak.iium.edu.my/cgi-bin/login' -Method POST -Body 'user=191XXX&password=YOURPASSWORD&cmd=authenticate&Login=Log%2BIn'
+![Insomnia right click generate client code](/static/blog/hack-wifi-2/insomnia-generate-code-right-click.jpg)
+
+From the language dropdown, choose **Powershell**, and select **Invoke-WebRequest**
+
+![Insomnia generate client code UI](/static/blog/hack-wifi-2/insomnia-client-code-copy.jpg)
+
+Here is the example of mine:
+
+```powershell showLineNumbers
+$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+$cookie = New-Object System.Net.Cookie
+$cookie.Name = 'CPsession'
+$cookie.Value = 'login%26ip%3D10%2E121%2E180%2E153'
+$cookie.Domain = 'captiveportalmahallahgombak.iium.edu.my'
+$session.Cookies.Add($cookie)
+$response = Invoke-WebRequest -Uri 'https://captiveportalmahallahgombak.iium.edu.my/cgi-bin/login' -Method POST -WebSession $session -ContentType 'undefined' -Body 'user=191XXX&password=MYPASSWORD&cmd=authenticate&Login=Log%2BIn'
 ```
 
-Change the **request URL** accordingly. Also, replace the username `191XXX` and password `YOURPASSWORD` with **your username and password**.
+<Admonition type="important">
+  Some characters are automatically url-encoded. Be sure to change it to normal encoding. Example:
+  Your password is `s@ample`, but in insomnia, it becomes `s%40mple`. Be sure to edit it to become
+  the original text.
+</Admonition>
+
+Test the script by clicking on the **Run script** button on the ribbon bar. The output will be shown on the console below it.
+
+![ISE first attempt error](/static/blog/hack-wifi-2/powershell-first-attempt-fail.jpg)
+
+As you might noticed, our first attempt didn't go well. From the error message, it doesn't like the `-ContentType 'undefined'` being undefined. So, remove that. Then, re-run the script again.
+
+![ISE empty response](/static/blog/hack-wifi-2/powershell-run-empty-response.jpg)
+
+The console shows no error, it shows that we have made some improvements. But, the it is empty without any message showing it successful or not.
+
+So, I figured it by leaving the `Invoke-WebRequest`command alone, the script works. Remove all the code before the `Invoke-WebRequest` as shown below. Also delete the `-WebSession $session` in `Invoke-WebRequest` line.
+
+![ISE delete nonsense](/static/blog/hack-wifi-2/powershell-delete-nonsense.jpg)
+
+The script will look similar to this pattern:
+
+```powershell
+Invoke-WebRequest -Uri '<REQUESTURL>' -Method <METHOD> -Body '<BODY>'
+```
+
+Where,
+
+- **REQUESTURL**: The server URL.
+- **BODY**: Request body. It will contains your username, password etc.
+- **METHOD**: POST, GET, etc.
+
+Re run the script.
+
+![ISE success](/static/blog/hack-wifi-2/powershell-run-success-correct.jpg)
+
+Successful request! As shown from the response above, it shows status code of 200 (which is good). Now, test the internet connection using the browser.
 
 **Save the file**, take note the folder and filename you save into. I save it in **Documents** folder as `wifilogin.ps1`.
+
+#### Create powershell .ps1 shortcut
+
+Next, we need to create a shortcut to run the powershell script directly. Start by copy the full path to your .ps1 script we saved earlier.
+
+![Windows 11 copy as path](/static/blog/hack-wifi-2/w-copy-as-path.jpg)
+
+Go to the **Desktop** to create a new shortcut. Right click, select **New** > **Shortcut**. A new **Create Shortcut** window will appear. Enter the following:
+
+```
+powershell.exe -noexit -ExecutionPolicy Bypass -File <SCRIPT_PATH>
+```
+
+Where **SCRIPT_PATH** is the path you've copied earlier.
+
+![Wizard create shortcut](/static/blog/hack-wifi-2/w-create-shortcut.jpg)
+
+Click **Next**, feel free to name the shortcut whatever you want. Then, click **Finish**. A new shortcut will appear.
+
+![Windows 11 shortcut created](/static/blog/hack-wifi-2/w-shotcut-created.jpg)
+
+Next time, you can login to the wifi quickly by just clicking the shortcut.
+
+![powershell shortcut run](/static/blog/hack-wifi-2/w-ps-shortcut.jpg)
 
 ### Android
 
 Download [**HTTP Request Shortcut**](https://play.google.com/store/apps/details?id=ch.rmy.android.http_shortcuts) app from the Google Play.
 
+<Admonition type="tip">
+  The app also offers **desktop (web-based) editing** feature. It allows you modify the data in the
+  browser and sync it to your phone. Detail: https://http-shortcuts.rmy.ch/editor/#/
+</Admonition>
+
+![Insomnia copy as curl](/static/blog/hack-wifi-2/insomnia-copy-curl.jpg)
+
 ## Concluding remarks
 
 You can also set the script to run every time your computer boot, so that you'll have a continuous access to the wifi network.
+
+## Credits
+
+- https://winaero.com/create-shortcut-ps1-powershell-file-windows-10/
