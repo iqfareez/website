@@ -1,0 +1,67 @@
+---
+title: Making a registration system using Telegram
+date: '2022-07-28'
+tags: ['telegram', 'api', 'bot', 'tutorial', 'heroku', 'firebase', 'firestore']
+draft: false
+summary: "Creating a registration system not using a regular form. We'll learn about Telegram bot API, Firebase Firestore, Python, Heroku etc."
+images: []
+layout: PostLayout
+canonicalUrl: https://iqfareez.com/blog/making-a-registration-system-using-telegram-bot
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+
+## Prerequisites
+
+- Python (my version: `3.10`)
+- Heroku CLI (my version: `7.60.2`)
+- Node (pun double confirimkan)
+- git double confirmkan balik adakah diperlukan oleh Heroku CLI?
+
+## Create a new Telegram bot
+
+Go to [BotFather bot](https://t.me/botfather) to create a new bot. Click the **Start** button. From the **menu** button, choose the `/newbot` option. It will ask you the name and username for the bot. Give it according to your liking, but this is what I named them:
+
+- Name: _DaftarBot_
+- Username: _mydaftarbot_
+
+After the process completed, BotFather will give the bot's **link** and the **API key** to use the bot.
+
+![Botfater create bot success](/static/blog/tele-regist-system/tg-newbot.jpg)
+
+<Admonition type="caution">
+  Unlike in the picture above where I didn't censor the API key (for demonstration purposes). **You
+  should keep the API key to yourselves**. People can have complete control of the bot if they have
+  it. *I revoked the key after finished writing this article*
+</Admonition>
+
+## Create a new Firebase project & setup Firestore database
+
+Our registration system need to have some sorts of database. Firebase Firestore seems like a suitable choices for our use cases.
+
+Open [Firebase Console](https://console.firebase.google.com/) and click the **Add Project** button. It will ask you to enter a name for the project. Give it `DaftarBot` (example). Click Continue. Turn off the **Enable Google Analytics for this project** option (optional) and click on **Create Project**.
+
+From the sidebar, click on **Firestore Database** and click on **Create Database**.
+
+![Firebase create firestore](/static/blog/tele-regist-system/firebase-create-firestore.jpg)
+
+Select test mode.
+
+![Firestore test mode](/static/blog/tele-regist-system/firestore-test-mode.jpg)
+
+Choose the geographic location you prefer.
+
+![Firestore select db loc](/static/blog/tele-regist-system/firestore-select-location.jpg)
+
+Click **Enable**, the database will be initialized.
+
+![Firestore succcessfully initialized](/static/blog/tele-regist-system/firestore-new-created.jpg)
+
+Our firestore database has been successfully created. We will leave it for now.
+
+## References
+
+If you're lost anywhere in the article, feel free to refer from the following resources.
+
+-
