@@ -18,6 +18,7 @@ import Admonition from 'react-admonitions'
 - Heroku CLI (my version: `7.60.2`)
 - Node (pun double confirimkan)
 - git double confirmkan balik adakah diperlukan oleh Heroku CLI?
+- Code editor: [VS Code](https://code.visualstudio.com/), [PyCharm](https://www.jetbrains.com/pycharm/), [Sublime Text](https://www.sublimetext.com/), [Atom](https://atom.io/), etc. (I'm using VS Code)
 
 ## Create a new Telegram bot
 
@@ -36,11 +37,13 @@ After the process completed, BotFather will give the bot's **link** and the **AP
   it. *I revoked the key after finished writing this article*
 </Admonition>
 
-## Create a new Firebase project & setup Firestore database
+## Create a new Firebase project
 
 Our registration system need to have some sorts of database. Firebase Firestore seems like a suitable choices for our use cases.
 
 Open [Firebase Console](https://console.firebase.google.com/) and click the **Add Project** button. It will ask you to enter a name for the project. Give it `DaftarBot` (example). Click Continue. Turn off the **Enable Google Analytics for this project** option (optional) and click on **Create Project**.
+
+## Setup Firestore database
 
 From the sidebar, click on **Firestore Database** and click on **Create Database**.
 
@@ -59,6 +62,61 @@ Click **Enable**, the database will be initialized.
 ![Firestore succcessfully initialized](/static/blog/tele-regist-system/firestore-new-created.jpg)
 
 Our firestore database has been successfully created. We will leave it for now.
+
+## Prepare the environment
+
+Create a new folder in your system. I'll name it as `tele-registration-bot`. Then, open up the folder in VS Code.
+
+```powershell
+mkdir tele-registration-bot; code tele-registration-bot
+```
+
+<Admonition type="note">
+  If you have multiple versions pf python installed on your system, make sure to use the correct
+  version of it to ensure everything is working correctly. I'm using **Python 3.10.2**.
+
+Check your python version by using `python --version` or `py --version`.
+
+</Admonition>
+
+To easily manage our project so it doesn't messed up with other projects, **virtual environment** is a way to go.
+
+In VS Code, click **Terminal** > **New Terminal** and run this command to create a new python virtual environment.
+
+```powershell
+py  -m venv venv
+```
+
+To **activate** it, run
+
+```
+venv/Scripts/Activate.ps1
+```
+
+(You can found other scripts for different type of terminal in **./venv/Scripts/** folders.)
+
+You'll notice in your terminal, it will label it as `(venv)` and the beginning of the line.
+
+**_ gambar here _**
+
+We are going to use few libraries for the project. Create a new file called `requirements.txt` and put the following contents:
+
+```txt:requirements.txt
+python-telegram-bot==13.13
+requests
+```
+
+(Optional) Update the pip version to the latest version.
+
+```powershell
+py -m pip install --upgrade pip
+```
+
+To install the required package for the project, run:
+
+```powershell
+pip install -r requirements.txt
+```
 
 ## References
 
