@@ -1,12 +1,13 @@
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import Banner from '@/components/Banner'
-import Tag from '@/components/Tag'
+// import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
-import formatDate from '@/lib/utils/formatDate'
+// import formatDate from '@/lib/utils/formatDate'
+import Typewriter from 'typewriter-effect'
 
-import NewsletterForm from '@/components/NewsletterForm'
+// import NewsletterForm from '@/components/NewsletterForm'
 
 const MAX_DISPLAY = 5
 
@@ -33,6 +34,32 @@ export default function Home() {
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
           </p>
+          <Typewriter
+            options={{
+              autoStart: true,
+              loop: true,
+              delay: 50,
+              deleteSpeed: 25,
+            }}
+            onInit={(typewriter) => {
+              typewriter
+                .typeString("I'm Fareez Iqmal")
+                .pauseFor(2100)
+                .deleteChars(12)
+                .typeString('an engineering student in mechatronics')
+                .pauseFor(2100)
+                .deleteChars(37)
+                .typeString(' hobbyist developer')
+                .pauseFor(2100)
+                .deleteAll()
+                .typeString('I love tech')
+                .pauseFor(2100)
+                .deleteChars(4)
+                .typeString('to build things')
+                .pauseFor(2100)
+                .start()
+            }}
+          />
         </div>
         <div className="divide-y divide-gray-200 dark:divide-gray-700" />
       </div>
