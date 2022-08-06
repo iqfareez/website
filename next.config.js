@@ -73,6 +73,12 @@ module.exports = withBundleAnalyzer({
         destination: 'tel:+60193988956',
         permanent: true,
       },
+      {
+        source: '/resume',
+        destination:
+          'https://drive.google.com/file/d/10XhyK8VQP9EE-LOSl10LhmK3TBi5Q_lA/view?usp=sharing',
+        permanent: true,
+      },
     ]
   },
   webpack: (config, { dev, isServer }) => {
