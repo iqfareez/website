@@ -34,7 +34,7 @@ First, open **Windows Powershell ISE**.
 
 A new empty file will appear (if not, go to `File` > `New`.
 
-Open Insomnia, right click on your request and click on **Generate code**.
+Open Insomnia, right-click on your request and click on **Generate code**.
 
 ![Insomnia right click generate client code](/static/blog/hack-wifi-2/insomnia-generate-code-right-click.jpg)
 
@@ -86,7 +86,7 @@ Where,
 - **BODY**: Request body. It will contains your username, password etc.
 - **METHOD**: POST, GET, etc.
 
-Re run the script.
+Re-run the script.
 
 ![ISE success](/static/blog/hack-wifi-2/powershell-run-success-correct.jpg)
 
@@ -114,7 +114,7 @@ Click **Next**, feel free to name the shortcut whatever you want. Then, click **
 
 ![Windows 11 shortcut created](/static/blog/hack-wifi-2/w-shotcut-created.jpg)
 
-Next time, you can login to the wifi quickly by just clicking the shortcut.
+Next time, you can log in to the Wi-Fi quickly by just clicking the shortcut.
 
 ![powershell shortcut run](/static/blog/hack-wifi-2/w-ps-shortcut.jpg)
 
@@ -129,10 +129,38 @@ Download [**HTTP Request Shortcut**](https://play.google.com/store/apps/details?
 
 ![Insomnia copy as curl](/static/blog/hack-wifi-2/insomnia-copy-curl.jpg)
 
+Transfer the copied item to your phone. Then, open the app and click on the **Add shortcut** button.
+
+![Http Shorcut new](/static/blog/hack-wifi-2/http-shortcut-app-2.jpg)
+
+When the dialog opens, select the **Import from cURL Command**. Paste the item in the input box.
+
+![Http Shortcut paste curl](/static/blog/hack-wifi-2/http-shortcut-app-3.jpg)
+
+Then, click the **Import** button. A new **Create Shortcut** window will appear. Give it the name. icons, and description as you wish.
+
+TODO: letak gambar nnti
+
+After that, click the **Save** button. The shortcut will now appear in the app. Tap once to test if it is working.
+
+![Http shorcut test finish](/static/blog/hack-wifi-2/http-shortcut-finish.gif)
+
+<details>
+    <summary>**In case** the wifi login failed, play around with the **advanced settings**</summary>
+
+    In my case, before enabling this setting, it cannot successfully authenticate with the server. Go to **Advanced
+    Technical Settings**, then, check the box that says **Accept any certificate**.
+
+    ![Http Shortcut advanced](/static/blog/hack-wifi-2/http-shortcut-app-1.jpg)
+
+</details>
+
+Done. You may want to create a homescreen shortcut for easy access. Next time you want to log in to the Wi-Fi, just tap the shortcut.
+
 ## Concluding remarks
 
-You can also set the script to run every time your computer boot, so that you'll have a continuous access to the wifi network.
+You can also set the script to run every time your computer boot, so that you'll have continuous access to the Wi-Fi network.
 
-## Credits
+## References
 
 - https://winaero.com/create-shortcut-ps1-powershell-file-windows-10/
