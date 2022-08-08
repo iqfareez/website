@@ -14,7 +14,7 @@ import Admonition from 'react-admonitions'
 
 In this article, I'm going to share on how you can log in to the captive portal with just **one click**. No need to open a web browser just to waste your time typing down your username and password everytime you need to do so.
 
-If you have no idea about what is Captive Portal, hacking wifi and so on, do have a read the [first part](hacking-wifi-captive-portal-1) of this article.
+If you have no idea about what is captive portal etc., do have a read the [first part](hacking-wifi-captive-portal-1) of this article.
 
 ![Desktop shortcut login wifi](/static/blog/hack-wifi-2/shortcut_login_iium.jpg)
 
@@ -30,7 +30,7 @@ We are going to use Powershell script since it has a method `Invoke-Request` to 
 
 #### Preparing a Powershell script using Powershell ISE
 
-First, open **Windows Powershell ISE**.
+First, open [**Windows Powershell ISE**](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-7.2#to-start-the-windows-powershell-ise).
 
 A new empty file will appear (if not, go to `File` > `New`.
 
@@ -139,14 +139,15 @@ When the dialog opens, select the **Import from cURL Command**. Paste the item i
 
 Then, click the **Import** button. A new **Create Shortcut** window will appear. Give it the name. icons, and description as you wish.
 
-TODO: letak gambar nnti
+![HTTP Shortcut wizard new](/static/blog/hack-wifi-2/http-shortcut-app-wizard.jpg)
 
 After that, click the **Save** button. The shortcut will now appear in the app. Tap once to test if it is working.
 
 ![Http shortcut test finish](/static/blog/hack-wifi-2/http-shortcut-finish.gif)
 
+<Admonition type={"tip"}>
 <details>
-    <summary>**In case** where the wifi login failed, play around with the **advanced settings**</summary>
+    <summary>**In case** where the wifi login failed, play around with the **advanced settings** in the app</summary>
 
     In my case, before enabling this setting, it cannot successfully authenticate with the server. Go to **Advanced
     Technical Settings**, then, check the box that says **Accept any certificate**.
@@ -154,12 +155,15 @@ After that, click the **Save** button. The shortcut will now appear in the app. 
     ![Http Shortcut advanced](/static/blog/hack-wifi-2/http-shortcut-app-1.jpg)
 
 </details>
+</Admonition>
 
-Done. You may want to create a homescreen shortcut for easy access. Next time you want to log in to the Wi-Fi, just tap the shortcut.
+Done 🎉. You can create a homescreen shortcut for easy access. Next time you want to log in to the Wi-Fi, just tap the shortcut.
 
 ## Concluding remarks
 
 That's it, now you know on how to log in to wifi captive portal without 'entering' the captive portal. You can further customize to improve your workflow. For example, set the script to run every time your computer boot, so that you'll have continuous access to the Wi-Fi network.
+
+As you might notice, the speed of the powershell script is quite slow. I made another script with Dart, and compile it to the native binary. It run significantly faster. Hopefully I can put the repo link here when it's ready.
 
 ## References
 
