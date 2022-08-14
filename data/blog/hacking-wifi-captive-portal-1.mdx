@@ -49,7 +49,7 @@ Connect to your campus/hotel/community wifi using a laptop or PC. The captive po
 
 Open the Developer Tools (or press F12) and go to the **Network** tab. Click the **Record network log** if it doesn't recording yet. Then, check the option **Preserve log**, so the network log doesn't disappear even when the traffic redirects.
 
-_Here I use Microsoft Edge. Any other chromium-based browser should work very similarly._
+_Here I use Microsoft Edge. Any other Chromium-based browser should work very similarly._
 
 ![Browser's Network tab F12](/static/blog/hack-wifi/f12-console.png)
 
@@ -191,7 +191,7 @@ login.end(); // free resources
 
 The code above will first connect to the Wifi. After a successful connection, it will make a POST request to the captive portal with your username & password to authenticate itself.
 
-To verify if there your ESP32 is connected to the internet, you can make a request to any API, and see if it returns something. You could use this `https://iqfareez.com/api/hello` simple API for testing.
+To verify if the ESP32 is connected to the internet, you can make a request to any API, and see if it returns something. You could use this `https://iqfareez.com/api/hello` simple API for testing.
 
 Put this code in the `loop()` function:
 
