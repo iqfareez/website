@@ -68,9 +68,9 @@ As you might noticed, our first attempt didn't go well. From the error message, 
 
 ![ISE empty response](/static/blog/hack-wifi-2/powershell-run-empty-response.jpg)
 
-The console shows no error, it shows that we have made some improvements. But, the it is empty without any message showing it successful or not.
+The console shows no error anymore, which is good. But, it's not showing any message to indicates it is successful or negative.
 
-So, I figured it by leaving the `Invoke-WebRequest`command alone, the script works. Remove all the code before the `Invoke-WebRequest` as shown below. Also delete the `-WebSession $session` in `Invoke-WebRequest` line.
+I figured it by leaving the `Invoke-WebRequest`command alone, the script works. Remove all the code before the `Invoke-WebRequest` as shown below. Also delete the `-WebSession $session` in `Invoke-WebRequest` line.
 
 ![ISE delete nonsense](/static/blog/hack-wifi-2/powershell-delete-nonsense.jpg)
 
@@ -127,9 +127,11 @@ Download [**HTTP Request Shortcut**](https://play.google.com/store/apps/details?
   browser and sync it to your phone. Detail: https://http-shortcuts.rmy.ch/editor/#/
 </Admonition>
 
+From Insomnia, right-click at the request entry and click **Copy as Curl**.
+
 ![Insomnia copy as curl](/static/blog/hack-wifi-2/insomnia-copy-curl.jpg)
 
-Transfer the copied item to your phone. Then, open the app and click on the **Add shortcut** button.
+Transfer the copied item to your phone (using Telegram etc.). Then, open the app and click on the **Add shortcut** button.
 
 ![Http Shortcut new](/static/blog/hack-wifi-2/http-shortcut-app-2.jpg)
 
