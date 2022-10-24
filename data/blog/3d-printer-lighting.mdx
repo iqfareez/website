@@ -1,0 +1,143 @@
+---
+title: I installed LED lighting to my 3D printer
+date: '2022-10-24'
+tags: ['3d print', 'electronics', 'diy', 'tutorial']
+draft: false
+summary: See better what your printer is printing with just $5 and some electronics skill
+images: ['/static/blog/led-lighting-hornet/meta-og.png']
+layout: PostLayout
+canonicalUrl: https://iqfareez.com/blog/3d-printer-lighting
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+
+Having to turn on the main room light can be too much, especially at night. It might disturb other persons
+live in the same room with me too. From that, I got the idea to install some ligthing to my 3D printer.
+
+I'm using is **[Artillery Hornet](https://my.cytron.io/p-artillery-hornet-3d-printer-partially-assembled-diy-kit?ref=99Y7TxrNIn6Jo) FDM 3D printer**. It is my first 3D machine and I loved it.
+
+## The idea
+
+Initially, I thought to just solder some LEDs that I had lying around onto a donut board. But, the light intensity of
+those LEDs is not so bright. I also need to calculate the required amount of resistance and place them on the board. Requires
+some work. One day, I scrolled through Shopee and find this [cheap SMD LED board](https://shopee.com.my/high-quality-5730-smd-5V-430mA~470mA-White-Mirco-Usb-5730-LED-lighting-panel-USB-mobile-light-Emergency-light-night-light-i.509537957.16270447789). I think it may fit perfectly
+with this project. It also comes with the micro usb port, enabling easy testing and prototyping.
+
+![LED board from shopee](/static/blog/led-lighting-hornet/1666067645345.jpg)
+
+## Designing the LED holder
+
+When the LED has been delivered, I test it and I measured its dimension to design a holder for it.
+This holder will be fitted into the aluminium profile of the printer.
+Using [Fusion 360](https://www.autodesk.com/products/fusion-360/personal) to make the design and after
+a few iteration, I came up with this:
+
+Sent it to my printer to print. This is the result, very satisfying.
+
+![LED holder printed](/static/blog/led-lighting-hornet/1666067645325.jpg)
+
+Then, slide the LED board to its casing
+
+![LED with its holder](/static/blog/led-lighting-hornet/1666067645303.jpg)
+
+## Power supply
+
+At the beginning, I was planning to use the [printer's power supply module](https://images.squarespace-cdn.com/content/v1/5d88f1f13db677155dee50fa/1617719468295-I3YMBIDZQ6RI7GG86EPQ/P1299680.JPG?format=1000w), so that the light will automatically turned
+on when I turned on the printer. To access the module, it has no other way than to access from the bottom. Seeing this as
+time-consuming can probably hard to maintain in the future, I decided to use a separate power supply - powerbank I had lying around.
+
+![Hornet from below](/static/blog/led-lighting-hornet/1666101448445.jpg)
+
+There is USB type B port at the side of the printer for data transmission purposes, so I'm
+not so sure if I can get 5V supply from there, plus I did not have much of its cable. At the end,
+I planned to just use one powerbank I have lying around. The wiring should be straightforward; USB to LED.
+
+## Wiring
+
+First, I take off the top gantry of the printer. It is held by 4 screws and can be removed using allen key. Luckily, it isn't attached to any stepper motor etc. It just
+there by itself so removing is a piece of cake. The holder also need to be removed.
+
+![Top gantry assembly](/static/blog/led-lighting-hornet/IMG_20221010_124825.jpg)
+
+Both LED board will connect with parallel configuration. The LED board has 2 pad with positive and negative so the wires can be soldered into it.
+Strip some jumper wires, expose the copper wire as needed only, not too long. Solder the wires to the LED board.
+
+In case it is still unclear, diagram below should be helpful. _(Note: You can replace the USB with other 5V sources. Eg: Arduino 5V output)_
+
+![Fritzing-LED-Wiring](/static/blog/led-lighting-hornet/frizingLED_bb.png)
+
+Find some USB connector you had, perhaps from old phone charger etc. Strip the wires. For data cable USB2.0, usually there will be 4 wires.
+We only need the power so find wire with red (positive supply) and black (ground). Because the wire is short in my case, I connected with another wire
+that is soldered to the LED board. But if your cable is long enough, you can just solder it directly to the LED board.
+
+<Admonition type="warning">
+
+Do not solder the wire when the LED board attached to its plastic case, the case may deforms under high temperature.
+
+</Admonition>
+
+Picture below is the combined wire. I use heatshrink to cover the wire to prevent short circuit (precaution).
+
+![Combine wire](/static/blog/led-lighting-hornet/1666067645250.jpg)
+
+Now, route the wire neatly inside the aluminium profile. Then, screw the handle in place, be careful not to screw the wires underneath.
+Connect the USB to power to see if the light turned on. After that, we can proceed to remount the gantry back to the printer.
+
+![Install led on aluminium profile](/static/blog/led-lighting-hornet/1666067645228.jpg)
+
+After some soldering
+
+![LED after soldering](/static/blog/led-lighting-hornet/1666067645188.jpg)
+
+Route the USB cable at the back of the vertical gantry. Be sure not to disturb the movement of the z-axis gantry movements.
+Optionally, use some cable ties to reduce the tension of the wires and to keep it clean.
+
+Picture below is the z-axis at its maximum (250mm), there are some safe spaces to route the wires.
+
+![picture z](/static/blog/led-lighting-hornet/1666532948627.jpg)
+
+## Final results
+
+<div className="flex flex-wrap -mx-2 overflow-hidden xl:-mx-2">
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Artillery Hornet Result 1](/static/blog/led-lighting-hornet/1666067645165.jpg)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Artillery Hornet Result 2](/static/blog/led-lighting-hornet/1666533853274.jpg)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Artillery Hornet Result 3](/static/blog/led-lighting-hornet/1666569300572.jpg)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Artillery Hornet Result 4](/static/blog/led-lighting-hornet/1666569300585.jpg)
+  </div>
+</div>
+
+You can also watch my cringe YouTube shorts [here](https://youtube.com/shorts/v2FO43Tx3cg?feature=share).
+
+## Further improvements
+
+For now, the problem is I need to manually turn on/off the light.
+What I want is for the light to automatically
+turn itself off when the printer is finish printing.
+
+I have few ideas running in my mind right now:
+
+### Access Marlin to get printing status
+
+![Artillery Hornet USB port](/static/blog/led-lighting-hornet/1666533853296.jpg)
+
+Marlin is the firmware that runs on the 3D printer. It is open source and (I think) can be accessed via USB port,
+just like an Arduino. I mean I've done [car interfacing](https://github.com/iqfareez/SCS-Intern/tree/main/CanBus-OBD) before, so to interface with the printer it shouldn't be that hard, is it?
+
+Well, for now I couldn't find anything online so I have to dig down by myself to see wether it is possible or not.
+
+### Timer off light
+
+This one is straightforward. Just hook up some microcontroller, add buttons to adjust countdown timer, relay etc. The timer can be set based on the slicer's estimated printing time.
+
+## Concluding remarks
+
+Anyway, thanks for reading. I hope you find this project interesting. Put your comments below if you have any. _I'm just gonna finish up the article(s) that
+have been in my drafts for eternity now_.
