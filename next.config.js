@@ -76,7 +76,7 @@ module.exports = withBundleAnalyzer({
       {
         source: '/resume',
         destination:
-          'https://drive.google.com/file/d/10XhyK8VQP9EE-LOSl10LhmK3TBi5Q_lA/view?usp=sharing',
+          'https://drive.google.com/file/d/1H9B--KMDip0EbRZVBWuLvlQO9Q4lLlD7/view?usp=sharing',
         permanent: true,
       },
     ]
