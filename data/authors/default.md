@@ -13,7 +13,7 @@ Fareez is a Mechatronics Engineering student at IIUM Gombak who is passionate in
 
 ## Work experiences
 
-[**System Consultancy Services**](http://www.scs.my/) | July 2022 - present
+[**System Consultancy Services**](http://www.scs.my/) | July 2022 - September 2022
 
 - Engineering trainee in Research & Development Department.
 
@@ -27,6 +27,7 @@ Fareez is a Mechatronics Engineering student at IIUM Gombak who is passionate in
 
 - **ROBOCON Malaysia** @ USM Pulau Pinang
 - **UMHackathon 2021** - Finalists in Agriculture domain
+- **Pertandingan Keusahawanan Digital 2022** in mobile application category
 
 ## Side projects
 
@@ -46,7 +47,7 @@ See [projects](../projects)
 **International Islamic University Malaysia (IIUM)** | June 2018 - May 2019
 
 - Foundation in **Engineering and Computer Science**.
-- Committee of **Taaruf Week (TaWe)** 2019/2020.
+- Committee of **Taa'ruf Week (TaWe)** 2019/2020.
 - Committee of **Enginius Open Day**.
 
 **MARA Junior Science College, Kuala Kubu Bharu** | 2016 - 2017
