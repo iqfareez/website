@@ -11,7 +11,7 @@ const ContentSecurityPolicy = `
   media-src 'none';
   connect-src * *.google-analytics.com *.analytics.google.com *.googletagmanager.com;
   font-src 'self';
-  frame-src giscus.app
+  frame-src giscus.appn *.youtube.com
 `
 
 const securityHeaders = [
