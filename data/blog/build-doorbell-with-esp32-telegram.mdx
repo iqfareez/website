@@ -1,10 +1,10 @@
 ---
 title: Build doorbell with ESP32 & Telegram
-date: '2022-10-29'
+date: '2022-10-30'
 tags: ['tutorial', 'telegram', 'esp32', 'api']
 draft: false
 summary: Make your own doorbell using ESP32 microcontroller and send notification to owner through Telegram
-images: []
+images: ['/static/blog/esp-tele-simple/metatgs-esp-tele-simple.png']
 layout: PostLayout
 canonicalUrl: https://iqfareez.com/blog/build-doorbell-with-esp32-telegram
 authors: ['default']
@@ -13,14 +13,14 @@ authors: ['default']
 import Admonition from 'react-admonitions'
 
 Ever wondered who's knocking at your house's door? Whether it is your family member, a friend or a stranger? You can now know who's at your door with this simple project.
-We will use ESP32 microcontroller to detect the doorbell button press and send notification to you (house owner) through Telegram.
+We will use **ESP32 microcontroller** to detect the doorbell button press and send notification to you (house owner) through **Telegram**.
 
 ## Prerequisites
 
-- Telegram app
-- ESP32
-- Some push buttons
-- Breadboard & wires
+- [Telegram](https://telegram.org/)
+- [ESP32](https://my.cytron.io/p-nodemcu-esp32?ref=99Y7TxrNIn6Jo) (ESP8266 is possible, though there are slight differences in the code)
+- Some momentary push buttons ([like this](https://my.cytron.io/search?search=push%20button))
+- Breadboard & jumper wires
 
 ## Building the circuit
 
@@ -28,7 +28,7 @@ We'll start simple, which is to construct the doorbell circuit. The circuit show
 
 ![Fritzing circuit doorbell](/static/blog/esp-tele-simple/tele-esp-simple_bb.png)
 
-![Real life cirrcuit](https://imgur.com/9fiMs1X.png)
+![Real life circuit](https://imgur.com/9fiMs1X.png)
 
 Each buttons represent a person. For example, the first button is for family member, the second button is for a friend, and the third button is for delivery man (postman or pizza man or whatever).
 
@@ -47,11 +47,43 @@ At the end of the setup, you will get a link to bot with the token. We will need
   </div>
 </div>
 
-Click on the bot link to open the bot and send the `/start` command to start the conversation. This steps is important
+Click on the bot link to open the bot and send the `/start` command to start the conversation. These steps are important
 since [bots can't start a conversation with a user](https://core.telegram.org/bots#how-are-bots-different-from-users).
 By `/start`-ing it, you'll allow the bot to send message to you.
 
 ![Tele start2](/static/blog/esp-tele-simple/Screenshot_20221029_063618.png)
+
+## Using the Telegram bot API
+
+Telegram bot API is a RESTful API that allows you to send message (and many other [things](https://core.telegram.org/bots/api#available-types)) to your bot.
+
+Like many other REST API out there, Telegram bot API can be invoked by sending an HTTP request to the API endpoint. The request
+require a token to identify the bot identity. The token is created when we [created](#setting-up-telegram-bot) the bot using BotFather.
+
+Diagram below shown an anatomy of a Telegram bot API request.
+
+![Telegram bot API request anatomy](/static/blog/esp-tele-simple/telegram-bot-url-structure.png)
+
+Let's try an example: Replace the `<BOTTOKEN>` with your token, copy the URL and paste it in your browser. A message `Hello world` should arrive
+to your Telegram.
+
+`https://api.telegram.org/bot<BOTTOKEN>/sendMessage?chat_id=320195187&text=Hello%20world`
+
+To learn more about the Telegram API, kindly read the documentation [here](https://core.telegram.org/bots/api).
+
+<Admonition type="tip" title={"Tip: Debugging API"}>
+  <details>
+    <summary>Use Insomnia to test the API</summary>
+
+    Insomnia is a REST client that allows you to test the API. You can experiment with different parameters and values, learn
+    about errors etc.
+
+    ![Insomnia screenshot](/static/blog/esp-tele-simple/Screenshot_20221029_065332.png)
+
+    You can download Insomnia at https://insomnia.rest/download.
+
+  </details>
+</Admonition>
 
 ## Coding the ESP32
 
@@ -113,7 +145,7 @@ void setup() {
 }
 ```
 
-Then in the loop() function, we check for input from the buttons. If the button is pressed, we send a message to the bot.
+Then in the `loop()` function, we check for input from the buttons. If the button is pressed, we send a message to the bot.
 
 ```cpp
 void loop() {
@@ -140,6 +172,8 @@ void loop() {
   }
 }
 ```
+
+Full source code [here](https://github.com/iqfareez/Doorbell-telegram/blob/main/simple_doorbell/simple_doorbell.ino).
 
 The one-second delay is to avoid message spamming if the button is pressed multiple times.
 
