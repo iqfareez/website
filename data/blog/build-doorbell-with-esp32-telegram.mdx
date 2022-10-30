@@ -3,7 +3,7 @@ title: Build doorbell with ESP32 & Telegram
 date: '2022-10-30'
 tags: ['tutorial', 'telegram', 'esp32', 'api']
 draft: false
-summary: Make your own doorbell using ESP32 microcontroller and send notification to owner through Telegram
+summary: Make your own doorbell system using ESP32 microcontroller and send notification to owner through Telegram
 images: ['/static/blog/esp-tele-simple/metatgs-esp-tele-simple.png']
 layout: PostLayout
 canonicalUrl: https://iqfareez.com/blog/build-doorbell-with-esp32-telegram
@@ -117,6 +117,9 @@ In `setup()` function, we initialize the pins and connect to Wi-Fi. The `INPUT_P
 internal pull-up resistor to pull the pin to high when the button is not pressed. This is useful since we don't need
 to connect the button to the 3.3V pin.
 
+Then, it will attempt to connect to Wi-Fi. If the connection is successful, it will print the IP address of the ESP32. Learn more
+about Wi-Fi connection for ESP32 [here](https://www.upesy.com/blogs/tutorials/how-to-connect-wifi-acces-point-with-esp32).
+
 <Admonition type="warning">
   Not all pins support `INPUT_PULLUP`. Do watch [this video](https://youtu.be/c0tMGlJVmkw?t=181) to
   learn more about all pins in ESP32.
@@ -181,7 +184,7 @@ That's all! We're done. Connect the ESP32 and upload the code.
 
 ![Arduino select board and port](/static/blog/esp-tele-simple/Screenshot-2022-10-29-163351.jpg)
 
-If everything goes well, you should see the following output in the serial monitor.
+If everything goes well, we should see the following output in the serial monitor.
 
 ![Arduino Serial monitor](/static/blog/esp-tele-simple/Screenshot-2022-10-29-185140.jpg)
 
