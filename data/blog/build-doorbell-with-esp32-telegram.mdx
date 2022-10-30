@@ -1,0 +1,182 @@
+---
+title: Build doorbell with ESP32 & Telegram
+date: '2022-10-29'
+tags: ['tutorial', 'telegram', 'esp32', 'api']
+draft: false
+summary: Make your own doorbell using ESP32 microcontroller and send notification to owner through Telegram
+images: []
+layout: PostLayout
+canonicalUrl: https://iqfareez.com/blog/build-doorbell-with-esp32-telegram
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+
+Ever wondered who's knocking at your house's door? Whether it is your family member, a friend or a stranger? You can now know who's at your door with this simple project.
+We will use ESP32 microcontroller to detect the doorbell button press and send notification to you (house owner) through Telegram.
+
+## Prerequisites
+
+- Telegram app
+- ESP32
+- Some push buttons
+- Breadboard & wires
+
+## Building the circuit
+
+We'll start simple, which is to construct the doorbell circuit. The circuit shown below should be enough to get you started.
+
+![Fritzing circuit doorbell](/static/blog/esp-tele-simple/tele-esp-simple_bb.png)
+
+![Real life cirrcuit](https://imgur.com/9fiMs1X.png)
+
+Each buttons represent a person. For example, the first button is for family member, the second button is for a friend, and the third button is for delivery man (postman or pizza man or whatever).
+
+## Setting up Telegram bot
+
+Go to BotFather bot to create your brand new bot. Tap on the command `/newbot` and follow the instructions.
+
+At the end of the setup, you will get a link to bot with the token. We will need it later.
+
+<div className="flex flex-wrap -mx-2 overflow-hidden xl:-mx-2">
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Botfather1](/static/blog/esp-tele-simple/Screenshot_20221029_040120.png)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Botfather2](/static/blog/esp-tele-simple/Screenshot_20221029_040255.png)
+  </div>
+</div>
+
+Click on the bot link to open the bot and send the `/start` command to start the conversation. This steps is important
+since [bots can't start a conversation with a user](https://core.telegram.org/bots#how-are-bots-different-from-users).
+By `/start`-ing it, you'll allow the bot to send message to you.
+
+![Tele start2](/static/blog/esp-tele-simple/Screenshot_20221029_063618.png)
+
+## Coding the ESP32
+
+Here's come the exciting part: coding the ESP32. First, open a new file using Arduino IDE.
+
+<Admonition type="note">
+  If this is your first time programming ESP32, you can follow [this
+  tutorial](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/)
+  to set up the Arduino IDE.
+</Admonition>
+
+We'll include the following libraries:
+
+```cpp
+#include <WiFi.h>
+#include <HTTPClient.h>
+```
+
+Then, declare some variables such as Wi-Fi connection info and pins.
+
+```cpp
+const char* ssid = "<YOURWIFISSID>";
+const char* password = "<YOURWIFIPASSWORD>";
+
+const int familyPin = 15;
+const int friendPin = 5;
+const int postmanPin = 22;
+```
+
+In `setup()` function, we initialize the pins and connect to Wi-Fi. The `INPUT_PULLUP` mode will use the ESP32's
+internal pull-up resistor to pull the pin to high when the button is not pressed. This is useful since we don't need
+to connect the button to the 3.3V pin.
+
+<Admonition type="warning">
+  Not all pins support `INPUT_PULLUP`. Do watch [this video](https://youtu.be/c0tMGlJVmkw?t=181) to
+  learn more about all pins in ESP32.
+</Admonition>
+
+```cpp
+void setup() {
+  Serial.begin(115200);
+  pinMode(familyPin, INPUT_PULLUP);
+  pinMode(friendPin, INPUT_PULLUP);
+  pinMode(postmanPin, INPUT_PULLUP);
+  delay(200);
+
+  WiFi.mode(WIFI_STA); //Optional
+  WiFi.begin(ssid, password);
+  Serial.println("\nConnecting");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(100);
+  }
+
+  Serial.println("\nConnected to the WiFi network");
+  Serial.print("Local ESP32 IP: ");
+  Serial.println(WiFi.localIP());
+}
+```
+
+Then in the loop() function, we check for input from the buttons. If the button is pressed, we send a message to the bot.
+
+```cpp
+void loop() {
+  int inputFamily = digitalRead(familyPin);
+  int inputPizza = digitalRead(friendPin);
+  int inputPostman = digitalRead(postmanPin);
+
+  if (inputFamily == LOW) {
+    Serial.println("Family is pressed");
+    sendMessage("Family");
+    delay(1000);
+  }
+
+  if (inputPizza == LOW) {
+    Serial.println("Friend is pressed");
+    sendMessage("Friend");
+    delay(1000);
+  }
+
+  if (inputPostman == LOW) {
+    Serial.println("postman is pressed");
+    sendMessage("Postman");
+    delay(1000);
+  }
+}
+```
+
+The one-second delay is to avoid message spamming if the button is pressed multiple times.
+
+That's all! We're done. Connect the ESP32 and upload the code.
+
+![Arduino select board and port](/static/blog/esp-tele-simple/Screenshot-2022-10-29-163351.jpg)
+
+If everything goes well, you should see the following output in the serial monitor.
+
+![Arduino Serial monitor](/static/blog/esp-tele-simple/Screenshot-2022-10-29-185140.jpg)
+
+Press the button, and you should see some notification coming from Telegram 😉.
+
+<div className="flex flex-wrap -mx-2 overflow-hidden xl:-mx-2">
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Telegram notification](https://imgur.com/TOJOvj5.png)
+  </div>
+  <div className="my-1 px-2 w-full overflow-hidden xl:my-1 xl:px-2 xl:w-1/2">
+    ![Telegram messages](https://imgur.com/kYkzfYA.png)
+  </div>
+</div>
+
+## Demo
+
+<iframe
+  width="437"
+  height="777"
+  src="https://www.youtube.com/embed/NSlOtP2vHqU"
+  title="[Demo] Doorbell ESP32 | Telegram notification"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+## Closing
+
+That's all for this tutorial. I hope you enjoyed it. If you have any questions, feel free to ask in the comments below.
+
+I'm going to make a more advanced version of this project, such as unlock the door using Telegram. Stay tuned!
+
+Also, I'm planning remake this project using [Raspberry Pi Pico W](https://my.cytron.io/p-raspberry-pi-pico-wireless?ref=99Y7TxrNIn6Jo). Wish me luck!
