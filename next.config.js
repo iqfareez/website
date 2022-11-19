@@ -8,10 +8,10 @@ const ContentSecurityPolicy = `
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app *.googletagmanager.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data: *.google-analytics.com *.googletagmanager.com;
-  media-src 'none';
+  media-src *.imgur.com;
   connect-src * *.google-analytics.com *.analytics.google.com *.googletagmanager.com;
   font-src 'self';
-  frame-src giscus.appn *.youtube.com
+  frame-src giscus.appn *.youtube.com *.imgur.com
 `
 
 const securityHeaders = [
