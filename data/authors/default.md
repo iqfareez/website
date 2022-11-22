@@ -9,7 +9,8 @@ linkedin: https://www.linkedin.com/in/iqfareez
 github: https://github.com/iqfareez
 ---
 
-Fareez is a Mechatronics Engineering student at IIUM Gombak who is passionate in developing mobile applications, and electronic project when he has time to spare.
+Fareez is a Mechatronics Engineering student at IIUM Gombak who is passionate about developing mobile applications,
+and electronic projects when he has time to spare.
 
 ## Work experiences
 
@@ -20,7 +21,7 @@ Fareez is a Mechatronics Engineering student at IIUM Gombak who is passionate in
 **KLezcar** | Feb 2018 - May 2018
 
 - Operation crew for car rental company in Puchong branch.
-- Responsible for the upkeep of a fleet of vehicles. This includes oil changes, tire balancing, and other routine maintenance.
+- Responsible for the upkeep of a fleet of vehicles. This includes oil changes, tire balancing, and other routine maintenances.
 - Work with customers to help them choose the right car for their needs and budget.
 
 ## Involvements

@@ -13,7 +13,7 @@ authors: ['default']
 import Admonition from 'react-admonitions'
 
 Ever wondered who's knocking at your house's door? Whether it is your family member, a friend or a stranger? You can now know who's at your door with this simple project.
-We will use **ESP32 microcontroller** to detect the doorbell button press and send notification to you (house owner) through **Telegram**.
+We will use **the ESP32 microcontroller** to detect the doorbell button press and send notification to you (a house owner) through **Telegram**.
 
 ## Prerequisites
 
@@ -31,11 +31,11 @@ We'll start simple, which is to construct the doorbell circuit. The circuit show
 
 ![Real life circuit](https://imgur.com/9fiMs1X.png)
 
-**Each buttons represent a person.** For example, the first button is for family member, the second button is for a friend, and the third button is for delivery man (postman or pizza man or whatever).
+**Each button represents a person.** For example, the first button is for family members, the second button is for a friend, and the third button is for delivery man (postman or pizza man or whatever).
 
 ## Setting up Telegram bot
 
-Go to BotFather bot to create your brand new bot. Tap on the command `/newbot` and follow the instructions.
+Go to BotFather bot to create your brand-new bot. Tap on the command `/newbot` and follow the instructions.
 
 At the end of the setup, you will get a link to bot with the **token**. We will need it later.
 
@@ -50,20 +50,21 @@ At the end of the setup, you will get a link to bot with the **token**. We will 
 
 Click on the bot link to open the bot and send the `/start` command to start the conversation. These steps are important
 since [bots can't start a conversation with a user](https://core.telegram.org/bots#how-are-bots-different-from-users).
-By `/start`-ing it, you'll allow the bot to send message to you.
+By `/start`-ing it, you'll allow the bot to send a message to you.
 
 ![Tele start2](/static/blog/esp-tele-simple/Screenshot_20221029_063618.png)
 
 ## Using the Telegram bot API
 
-Telegram bot API is a RESTful API that allows you to send message (and many other [things](https://core.telegram.org/bots/api#available-types)) to your bot.
+Telegram bot API is a RESTful API that allows you to send a message
+(and many other [things](https://core.telegram.org/bots/api#available-types)) to your bot.
 
 Like many other REST API out there, Telegram bot API can be invoked by sending an **HTTP request** to the API endpoint. The request
-require a token to identify the bot identity. The token is created when we [created](#setting-up-telegram-bot) the bot using BotFather.
+require a token to identify the bot identity. The token was created when we [created](#setting-up-telegram-bot) the bot using BotFather.
 
 The `chat_id` is the unique identifier for the target chat or group. The chat Id can be checked using [IDBot](https://t.me/myidbot).
 
-Diagram below shown an anatomy of a Telegram bot API request.
+The diagram below showed an anatomy of a Telegram bot API request.
 
 ![Telegram bot API request anatomy](/static/blog/esp-tele-simple/telegram-bot-url-structure.png)
 
@@ -151,7 +152,9 @@ void setup() {
 }
 ```
 
-We create a function to send message to Telegram. The function will take the target person as a parameter. The message will be
+We create a function to send a message to Telegram.
+The function will take the target person as a parameter.
+The message will be
 sent to the chat ID.
 
 ```cpp
@@ -206,9 +209,9 @@ void loop() {
 }
 ```
 
-Full source code [here](https://github.com/iqfareez/Doorbell-telegram/blob/main/simple_doorbell/simple_doorbell.ino).
+Full-source code [here](https://github.com/iqfareez/Doorbell-telegram/blob/main/simple_doorbell/simple_doorbell.ino).
 
-The one-second delay is to avoid message spamming if the button is pressed multiple times.
+The one-second delay is to avoid a message spamming if the button is pressed multiple times.
 
 That's all! We're done. Connect the ESP32 and upload the code.
 
@@ -244,6 +247,7 @@ Press the button, and you should see some notification coming from Telegram 😉
 
 That's all for this tutorial. I hope you enjoyed it. If you have any questions, feel free to ask in the comments below.
 
-I'm going to make a more advanced version of this project, such as unlock the door using Telegram. Stay tuned!
+I'm going to make a more advanced version of this project, such as unlocking the door using Telegram. Stay tuned!
 
-Also, I'm planning remake this project using [Raspberry Pi Pico W](https://my.cytron.io/p-raspberry-pi-pico-wireless?ref=99Y7TxrNIn6Jo). Wish me luck!
+Also,
+I'm planning to remake this project using [Raspberry Pi Pico W](https://my.cytron.io/p-raspberry-pi-pico-wireless?ref=99Y7TxrNIn6Jo). Wish me luck!

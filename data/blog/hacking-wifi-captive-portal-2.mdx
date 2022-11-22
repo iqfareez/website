@@ -12,33 +12,39 @@ authors: ['default']
 
 import Admonition from 'react-admonitions'
 
-In this article, I'm going to share on how you can log in to the captive portal with just **one click**. No web browser needed so we can save our time without typing down the username and password everytime.
+In this article, I'm going to share on how you can log in to the captive portal with just **one click**.
+No web browser is needed,
+so we can save our time without typing down the username and password everytime we need to use the internet.
 
-If you have no idea about what is captive portal etc., do have a read the [first part](hacking-wifi-captive-portal-1) of this article.
+If you have no idea about what is captive portal etc.,
+do have read the [first part](hacking-wifi-captive-portal-1) of this article.
 
 ![Desktop shortcut login wifi](/static/blog/hack-wifi-2/shortcut_login_iium.jpg)
 
 ## Basic principles
 
-We understand that by make a **POST request** with correct credentials will [authenticate ourselves](hacking-wifi-captive-portal-1#testing-and-verifying) to the wifi. So, the idea is to make a shortcut that can make the request.
+We understand that by making a **POST request** with correct credentials will [authenticate ourselves](hacking-wifi-captive-portal-1#testing-and-verifying) to
+Wi-Fi.
+So, the idea is to make a shortcut that can make the request.
 
-The platform I'm going to cover is for [Windows](#windows) and [Android](#android). But no worries, as this method can be easily adopted to other platforms.
+The platform I'm going to cover is for [Windows](#windows) and [Android](#android).
+But no worries, as this method can be adopted to other platforms.
 
 ### Microsoft Windows
 
-We are going to use Powershell script since it has a method `Invoke-Request` to make the http requests.
+We are going to use a Powershell script since it has a method `Invoke-Request` to make the http requests.
 
 #### Preparing a Powershell script using Powershell ISE
 
 First, open [**Windows Powershell ISE**](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-7.2#to-start-the-windows-powershell-ise).
 
-A new empty file will appear (if not, go to `File` > `New`.
+A new empty file will appear (if not, go to `File` > `New`).
 
 Open Insomnia, right-click on your request and click on **Generate code**.
 
 ![Insomnia right click generate client code](/static/blog/hack-wifi-2/insomnia-generate-code-right-click.jpg)
 
-From the language dropdown, choose **Powershell**, and select **Invoke-WebRequest**
+From the language dropdown, choose **Powershell** and select **Invoke-WebRequest**
 
 ![Insomnia generate client code UI](/static/blog/hack-wifi-2/insomnia-client-code-copy.jpg)
 
@@ -64,17 +70,21 @@ Test the script by clicking on the **Run script** button on the ribbon bar. The 
 
 ![ISE first attempt error](/static/blog/hack-wifi-2/powershell-first-attempt-fail.jpg)
 
-As you might noticed, our first attempt didn't go well. From the error message, it doesn't like the `-ContentType 'undefined'` being undefined. So, remove that. Then, re-run the script again.
+As you might notice, our first attempt didn't go well.
+From the error message, it doesn't like the `-ContentType 'undefined'` being undefined.
+So, remove that.
+Then, re-run the script again.
 
 ![ISE empty response](/static/blog/hack-wifi-2/powershell-run-empty-response.jpg)
 
-The console shows no error anymore, which is good. But, it's not showing any message to indicates it is successful or negative.
+The console shows no error anymore, which is good.
+But it's not showing any message to indicate it is successful or negative.
 
 I figured it by leaving the `Invoke-WebRequest`command alone, the script works. Remove all the code before the `Invoke-WebRequest` as shown below. Also delete the `-WebSession $session` in `Invoke-WebRequest` line.
 
 ![ISE delete nonsense](/static/blog/hack-wifi-2/powershell-delete-nonsense.jpg)
 
-The script above ended up look like to this pattern:
+The script above ended up looking like this pattern:
 
 ```powershell
 Invoke-WebRequest -Uri '<REQUESTURL>' -Method <METHOD> -Body '<BODY>'
@@ -83,7 +93,7 @@ Invoke-WebRequest -Uri '<REQUESTURL>' -Method <METHOD> -Body '<BODY>'
 Where,
 
 - **REQUESTURL**: The server URL.
-- **BODY**: Request body. It will contains your username, password etc.
+- **BODY**: Request body. It contain your username, password etc.
 - **METHOD**: POST, GET, etc.
 
 Re-run the script.
@@ -96,7 +106,8 @@ Successful request! As shown from the response above, it shows status code of 20
 
 #### Create powershell .ps1 shortcut
 
-Next, we need to create a shortcut to run the powershell script directly. Start by copy the full path to your .ps1 script we saved earlier.
+Next, we need to create a shortcut to run the powershell script directly.
+Start by copying the full path to your .ps1 script we saved earlier.
 
 ![Windows 11 copy as path](/static/blog/hack-wifi-2/w-copy-as-path.jpg)
 
@@ -116,13 +127,13 @@ Click **Next**, feel free to name the shortcut whatever you want. Then, click **
 
 #### Run the shortcut
 
-Next time, you can log in to the Wi-Fi quickly by just clicking the shortcut.
+Next time, you can log in to Wi-Fi quickly by just clicking the shortcut.
 
 ![powershell shortcut run 2](/static/blog/hack-wifi-2/ps-wifi.gif)
 
 ### Android
 
-Download [**HTTP Request Shortcut**](https://play.google.com/store/apps/details?id=ch.rmy.android.http_shortcuts) app from the Google Play Strore.
+Download [**HTTP Request Shortcut**](https://play.google.com/store/apps/details?id=ch.rmy.android.http_shortcuts) app from Google Play Store.
 
 <Admonition type="tip">
   The app also offers **desktop (web-based) editing** feature. It allows you modify the data in the
@@ -161,7 +172,9 @@ After that, click the **Save** button. The shortcut will now appear in the app. 
 </details>
 </Admonition>
 
-Done 🎉. You can create a homescreen shortcut for easy access. Next time you want to log in to the Wi-Fi, just tap the shortcut.
+Done 🎉.
+You can create a home-screen shortcut for easy access.
+Next time you want to log in to the Wi-Fi, just tap the shortcut.
 
 <details>
   <summary>**Update 11/9/22:** i recently update my device to Android 12, and this method no longer works. 🥲</summary>
@@ -176,9 +189,15 @@ Relevant xkcd explaining the situation:
 
 ## Concluding remarks
 
-That's it, now you know on how to log in to wifi captive portal without 'entering' the captive portal. You can further customize to improve your workflow. For example, set the script to run every time your computer boot, so that you'll have continuous access to the Wi-Fi network.
+That's it, now you know on how to log in to Wi-Fi captive portal without 'entering' the captive portal.
+You can further customize to improve your workflow.
+For example, set the script to run every time your computer boots,
+so that you'll have continuous access to the Wi-Fi network.
 
-(**Bonus**) As you might notice, the speed of the [powershell script](#run-the-shortcut) is quite slow. I made another script using [Dart](https://dart.dev/), and compile it to the native binary. It runs significantly faster as in the GIF below ⚡. Create one for yourself now [here](https://github.com/iqfareez/dart_captive_portal_login).
+(**Bonus**) As you might notice, the speed of the [powershell script](#run-the-shortcut) is quite slow.
+I made another script using [Dart](https://dart.dev/), and compiled it to the native binary.
+It runs significantly faster as in the GIF below ⚡.
+Create one for yourself now [here](https://github.com/iqfareez/dart_captive_portal_login).
 
 ![Login with Dart](/static/blog/hack-wifi-2/dart-wifi.gif)
 

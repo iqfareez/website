@@ -12,26 +12,37 @@ authors: ['default']
 
 import Admonition from 'react-admonitions'
 
-Having to turn on the main room light can be too much, especially at night. It might disturb other persons
-live in the same room with me too. From that, I got the idea to install some lighting to my 3D printer.
+Having to turn on the main room light can be too much, especially at night.
+It might disturb other people who
+live in the same room with me too.
+From that, I got the idea of installing some lighting for my 3D printer.
 
-I'm using is **[Artillery Hornet](https://my.cytron.io/p-artillery-hornet-3d-printer-partially-assembled-diy-kit?ref=99Y7TxrNIn6Jo) FDM 3D printer**. It is my first 3D machine and I loved it.
+I'm using an **[Artillery Hornet](https://my.cytron.io/p-artillery-hornet-3d-printer-partially-assembled-diy-kit?ref=99Y7TxrNIn6Jo) FDM 3D printer**.
+It is my first 3D machine and I loved it.
 
 ## The idea
 
-Initially, I thought to just solder some LEDs that I had lying around onto a donut board. But, the light intensity of
-those LEDs is not so bright. I also need to calculate the required amount of resistance and place them on the board. Requires
-some work. One day, I scrolled through Shopee and find this [cheap SMD LED board](https://shopee.com.my/high-quality-5730-smd-5V-430mA~470mA-White-Mirco-Usb-5730-LED-lighting-panel-USB-mobile-light-Emergency-light-night-light-i.509537957.16270447789). I think it may fit perfectly
-with this project. It also comes with the micro usb port, enabling easy testing and prototyping.
+Initially, I thought to just solder some LEDs that I had lying around on a donut board.
+But, the light intensity of
+those LEDs is not so bright.
+I also need to calculate the required amount of resistance and place them on the board.
+Requires
+some work.
+One day,
+I scrolled through Shopee
+and found this [cheap SMD LED board](https://shopee.com.my/high-quality-5730-smd-5V-430mA~470mA-White-Mirco-Usb-5730-LED-lighting-panel-USB-mobile-light-Emergency-light-night-light-i.509537957.16270447789).
+I think it may fit perfectly
+with this project.
+It also comes with the micro usb port, enabling easy testing and prototyping.
 
 ![LED board from shopee](/static/blog/led-lighting-hornet/1666067645345.jpg)
 
 ## Designing the LED holder
 
-When the LED has been delivered, I test it and I measured its dimension to design a holder for it.
+When the LED has been delivered, I tested it and I measured its dimension to design a holder for it.
 This holder will be fitted into the aluminium profile of the printer.
-Using [Fusion 360](https://www.autodesk.com/products/fusion-360/personal) to make the design and after
-a few iteration, I came up with this:
+Using [Fusion 360](https://www.autodesk.com/products/fusion-360/personal) to make the design, and after
+a few iterations, I came up with this:
 
 Sent it to my printer to print. This is the result, very satisfying.
 
@@ -47,23 +58,31 @@ Then, slide the LED board to its casing
 
 At the beginning, I was planning to use the [printer's power supply module](https://images.squarespace-cdn.com/content/v1/5d88f1f13db677155dee50fa/1617719468295-I3YMBIDZQ6RI7GG86EPQ/P1299680.JPG?format=1000w), so that the light will automatically turned
 on when I turned on the printer. To access the module, it has no other way than to access from the bottom. Seeing this as
-time-consuming can probably hard to maintain in the future, I decided to use a separate power supply - powerbank I had lying around.
+time-consuming can probably be hard to maintain in the future, I decided to use a separate power supply - powerbank I had lying around.
 
 ![Hornet from below](/static/blog/led-lighting-hornet/1666101448445.jpg)
 
-There is USB type B port at the side of the printer for data transmission purposes, so I'm
-not so sure if I can get 5V supply from there, plus I did not have much of its cable. At the end,
-I planned to just use one powerbank I have lying around. The wiring should be straightforward; USB to LED.
+There is a USB type B port at the side of the printer for data transmission purposes, so I'm
+not so sure if I can get 5V supply from there, plus I did not have much of its cable.
+In the end,
+I planned to just use one powerbank I have lying around.
+The wiring should be straightforward; USB to LED.
 
 ## Wiring
 
-First, I take off the top gantry of the printer. It is held by 4 screws and can be removed using allen key. Luckily, it isn't attached to any stepper motor etc. It just
-there by itself so removing is a piece of cake. The holder also need to be removed.
+First, I took off the top gantry of the printer.
+It is held by 4 screws and can be removed using the allen key.
+Luckily, it isn't attached to any stepper motor etc.
+It is just
+there by itself, so removing is a piece of cake.
+The holder also needs to be removed.
 
 ![Top gantry assembly](/static/blog/led-lighting-hornet/IMG_20221010_124825.jpg)
 
-Both LED board will connect with parallel configuration. The LED board has 2 pad with positive and negative so the wires can be soldered into it.
-Strip some jumper wires, expose the copper wire as needed only, not too long. Solder the wires to the LED board.
+Both LED boards will connect with parallel configuration.
+The LED board has 2 pad with positive and negative, so the wires can be soldered into it.
+Strip some jumper wires, expose the copper wire as needed only, not too long.
+Solder the wires to the LED board.
 
 In case it is still unclear, diagram below should be helpful. _(Note: You can replace the USB with other 5V sources. Eg: Arduino 5V output)_
 
@@ -79,7 +98,7 @@ Do not solder the wire when the LED board attached to its plastic case, the case
 
 </Admonition>
 
-Picture below is the combined wire. I use heatshrink to cover the wire to prevent short circuit (precaution).
+The picture below is the combined wire. I use heat shrink to cover the wire to prevent short circuit (precaution).
 
 ![Combine wire](/static/blog/led-lighting-hornet/1666067645250.jpg)
 
@@ -130,16 +149,24 @@ I have few ideas running in my mind right now:
 
 ![Artillery Hornet USB port](/static/blog/led-lighting-hornet/1666533853296.jpg)
 
-Marlin is the firmware that runs on the 3D printer. It is open source and (I think) can be accessed via USB port,
-just like an Arduino. I mean I've done [car interfacing](https://github.com/iqfareez/SCS-Intern/tree/main/CanBus-OBD) before, so to interface with the printer it shouldn't be that hard, is it?
+Marlin is the firmware that runs on the 3D printer.
+It is an open source and (I think) can be accessed via a USB port,
+just like an Arduino.
+I mean I've done [car interfacing](https://github.com/iqfareez/SCS-Intern/tree/main/CanBus-OBD) before,
+so to interface with the printer it shouldn't be that hard, or is it?
 
-Well, for now I couldn't find anything online so I have to dig down by myself to see wether it is possible or not.
+Well, for now I couldn't find anything online, so I have to dig down by myself to see whether it is possible or not.
 
 ### Timer off light
 
-This one is straightforward. Just hook up some microcontroller, add buttons to adjust countdown timer, relay etc. The timer can be set based on the slicer's estimated printing time.
+This one is straightforward.
+Just hook up some microcontroller, add buttons to adjust the countdown timer, relay etc.
+The timer can be set based on the slicer's estimated printing time.
 
 ## Concluding remarks
 
-Anyway, thanks for reading. I hope you find this project interesting. Put your comments below if you have any. _I'm just gonna finish up the article(s) that
-have been in my drafts for eternity now_.
+Anyway, thanks for reading.
+I hope you find this project interesting.
+Put your comments below if you have any.
+I'm just going to finish up the article(s) that
+has been in my drafts for eternity now\_.
