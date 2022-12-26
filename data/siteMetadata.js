@@ -2,7 +2,8 @@ const siteMetadata = {
   title: 'Muhammad Fareez Iqmal',
   author: 'iqfareez',
   headerTitle: 'iqfareez',
-  description: 'A blog, project showcase, portfolio etc etc.',
+  description:
+    'Explore my personal website for articles and projects on hardware systems, technologies, and programming. As a Mechatronics Engineering student, I combine technical skills with creativity in my work. Check out my various projects and stay up-to-date on the latest trends.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://iqfareez.com',
