@@ -1,0 +1,173 @@
+---
+title: CUDA on Nvidia MX130 GPU
+date: '2023-01-28'
+tags: ['cuda', 'pytorch', 'superglue']
+draft: false
+summary: Guide to enabling CUDA on Nvidia MX130 GPU for machine vision inference on laptops
+images: ['/static/blog/cuda-mx130/CUDA-Blog-metatags.png']
+layout: PostLayout
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+import ReactPlayer from 'react-player/lazy'
+
+Welcome to this guide on how to enable CUDA on an [Nvidia MX130](https://www.nvidia.com/en-gb/geforce/gaming-laptops/nvidia-geforce-mx130/) GPU for machine vision inference on laptops. **CUDA** is a parallel computing platform and programming model developed by NVIDIA for general computing on graphical processing units (GPUs).
+
+The Nvidia MX130 is a dedicated GPU that is commonly found in laptops, it is not as powerful as the RTX GPU families, but it can still run some machine vision tasks efficiently. In this guide, we will cover the installation of necessary drivers and software, as well as any configuration required to properly utilize the GPU for these types of computations using [Pytorch](https://pytorch.org/). Keep in mind that the mileage may vary when using other frameworks.
+
+At the end, I will demo the performance using [SuperGlue](https://github.com/magicleap/SuperGluePretrainedNetwork)'s demo script.
+
+## Checking the GPU you have
+
+Usually, laptop with NVIDIA GPU already preinstalled with NVIDIA drivers along with NVIDIA Control Panel. So, open that to see your GPU version.
+
+![Nvidia Control Panel Driver](/static/blog/cuda-mx130/Screenshot_2023-01-28_075046.png)
+
+I have MX130 drivers. From the [specs page](https://www.nvidia.com/en-gb/geforce/gaming-laptops/nvidia-geforce-mx130/specifications/), it says it can support CUDA. If you have other drivers, you can still follow along this guide but your mileage may vary.
+
+Optionally, you can verify the CUDA supports using Python (You need [**Python 3.9**.x](https://www.python.org/downloads/release/python-3913/) version, as PyTorch doesn't support the latest Python version yet).
+
+```python
+from numba import cuda # run pip install numba
+cuda.detect()
+```
+
+Output:
+
+```text
+Found 1 CUDA devices
+id 0    b'NVIDIA GeForce MX130'                 [SUPPORTED (DEPRECATED)]
+                      Compute Capability: 5.0
+                           PCI Device ID: 0
+                              PCI Bus ID: 1
+                                    UUID: GPU-7b092133-34da-571d-9506-9de68403ed55
+                                Watchdog: Enabled
+                            Compute Mode: WDDM
+             FP32/FP64 Performance Ratio: 32
+Summary:
+	1/1 devices are supported
+
+Process finished with exit code 0
+
+```
+
+### Checking CUDA availability using PyTorch
+
+Even though the script above says that our GPU supports CUDA, the PyTorch still cannot 'see' the GPU yet.
+
+<Admonition type="tip">
+  I recommend you to create virtual environment to easily manage your packages and python version
+  per project
+</Admonition>
+
+Try running the script below:
+
+```python
+import torch as torch # pip install torch
+
+yes_cuda = torch.cuda.is_available()
+print(yes_cuda)
+```
+
+Output:
+
+```text
+False
+```
+
+So, we need to install some tools to make our CUDA visible to PyTorch.
+
+## Install VS Studio
+
+You may need to **install** [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) to correctly install CUDA.
+
+But for my case, I don't to install the full VS due to storage constraints, but I have the VS Build Tools already installed with C++ development. I just downloaded
+_Microsoft Visual C++ Redistributable for Visual Studio 2022_ just in case. You can get it from the download page, scroll down to _Other Tools, Frameworks, and Redistributables_.
+
+![VS Redistributable](/static/blog/cuda-mx130/Screenshot_20230128_042249.png)
+
+## Setup CUDA
+
+### Download supported CUDA version
+
+The latest CUDA version is 12.0. However, PyTorch doesn't support it yet, So, you'll need an older version of CUDA (`11.6` or `11.7`). Go to [Cuda Toolkit Archives](https://developer.nvidia.com/cuda-toolkit-archive)
+to download version `11.7.1`.
+
+You may select Installer Type to **local**, and proceed with downloading.
+
+![CUDA Download](/static/blog/cuda-mx130/Screenshot_2023-01-28_085406.png)
+
+### Install CUDA
+
+Once the file downloaded, double click it to begin installation.
+
+Click the Express Installation. It will install the CUDA toolkit, some other things, and your display driver.
+
+![CUDA Installation type express](/static/blog/cuda-mx130/Screenshot_20230128_090410.png)
+
+When the installation finishes. I got notified about trouble installing Nsight.
+
+![CUDA Nsight not installed](/static/blog/cuda-mx130/Screenshot_20230128_045741.png)
+
+As the description said, it may not be related to CUDA so just hit Next and complete the installation.
+
+![CUDA install complete](/static/blog/cuda-mx130/Screenshot_20230128_045759.png)
+
+### Verify the installation
+
+Open Command Prompt or Powershell, run the following command:
+
+```ps
+nvidia-smi
+```
+
+## Setup Pytorch (correctly)
+
+Go to [PyTorch's Get Started](https://pytorch.org/get-started/locally/) page. Select the setting accordingly, copy and run the command generated.
+
+![PyTorch download selector](/static/blog/cuda-mx130/Screenshot_20230128_091934.png)
+
+<Admonition type="note">
+  You may need to uninstall the existing PyTorch installation (`pip uninstall torch`) before running
+  the command below.
+</Admonition>
+
+Command:
+
+```ps
+pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+```
+
+If you re-run the code [previously](#checking-cuda-availability-using-pytorch). The output should be `True` indicating that
+PyTorch is able to recognise your CUDA GPU.
+
+## Demo
+
+I'm going to demo the machine vision project [SuperGlue Inference and Evaluation Demo Script](https://github.com/magicleap/SuperGluePretrainedNetwork) without CUDA (using CPU and with CUDA running on MX130).
+
+<Admonition type="warning">Your result may vary</Admonition>
+
+### Without CUDA
+
+`Running inference on device "cpu"`
+
+<ReactPlayer url="https://i.imgur.com/VK6pnMC.mp4" playing={true} controls={true} />
+
+Average FPS = 0.4
+
+### With CUDA
+
+`Running inference on device "cuda"`
+
+<ReactPlayer url="https://i.imgur.com/DvP0qyz.mp4" playing={true} controls={true} />
+
+Average FPS = 1.0
+
+The result with CUDA is improves. Please don't expect it to run on higher FPS as the GPU may not capable to deliver
+high intensive calculations.
+
+## References
+
+- https://pytorch.org/get-started/locally/
+- https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/
