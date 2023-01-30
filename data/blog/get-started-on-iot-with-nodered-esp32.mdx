@@ -45,11 +45,11 @@ node-red
 
 It will take a few seconds to start.
 
-[//]: # 'letak gambar nodered-started'
+![nodered server cmd](/static/blog/nodered-started-esp32/nodered-started.png)
 
-Once started. Open the instance link (eg: `http://127.0.0.1:1880/`) in the browser. You should see something like this:
+Once started. Open the instance URL (eg: `http://127.0.0.1:1880/`) in the browser. You should see something like this:
 
-[//]: # 'letak gambar nodered-welcome'
+![welcome to nodered](/static/blog/nodered-started-esp32/nodered-welcome.png)
 
 <Admonition type="warning">Don't kill/close your Terminal while Node-RED is running</Admonition>
 
@@ -78,13 +78,13 @@ You can drag and drop node from the left bar to the canvas. We'll begin by addin
 
 Search for `mqtt` in the left sidebar. Drag the **mqtt in** nodes to your flow.
 
-[//]: # 'add add-mqtt'
+![nodered add mqtt](/static/blog/nodered-started-esp32/add-mqtt.png)
 
 Double-click the added nodes to edit its configuration.
 
-[//]: # 'add image edit mqtt node'
+![edit mqtt nodered](/static/blog/nodered-started-esp32/edit-mqtt-node.png)
 
-To use MQTT, we need a broker and topic.
+To use MQTT, we need a **broker** and **topic**.
 
 If you're unfamiliar, **broker** is a server that facilitates communication between IoT devices. It receives published
 messages from devices, and then routes those messages to other devices that have subscribed to the same topic. The
@@ -97,7 +97,7 @@ or organizations. In this article, I'm going to use [HiveMq's public MQTT broker
 On the Server field, click the pencil icon to add a new MQTT broker. Add `broker.hivemq.com` to the URL field. Leave the
 other fields as it is.
 
-[//]: # 'letak gambar mqtt broker field'
+![mqtt broker add](/static/blog/nodered-started-esp32/add-new-mqtt-broker.png)
 
 Click the <kbd>Add</kbd> button.
 
@@ -109,7 +109,7 @@ Now, for the topic, we can give any String values. Let's put `mynode/led1`. For 
   [here](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/).
 </Admonition>
 
-[//]: # 'letak gambar dah siap setup'
+![mqtt completed](/static/blog/nodered-started-esp32/mqtt-completed-field.png)
 
 Click <kbd>Done</kbd> to finish editing.
 
@@ -122,11 +122,57 @@ In the upper right corner of the dashboard, click the hamburger menu > **Manage 
 
 Click on the Install tab and search for `node-red-dashboard`. Install the first top most result you see (Some warning dialog maybe shown, just click Install).
 
-[//]: # 'letak gambar manage-palettes (xingat)'
+![Manage palettes](/static/blog/nodered-started-esp32/search-palettes.png)
 
 After installation. Close the manage palettes dialog. You can now see the **Dashboard** nodes from the nodes list.
 
-[//]: # 'letak gambar sidebar'
+![Nodes sidebar](/static/blog/nodered-started-esp32/nodes-dashboard-sidebar.png)
+
+Now, search for **Text** nodes and add it to the flow. Connect mqtt node to the text node.
+
+![Add Text node connecting](/static/blog/nodered-started-esp32/nodered-add-text.gif)
+
+Double-click the Text node to edit it properties. On the **Group** field, click the pencil icon, then, on the **Tab** field.
+click the pencil icon again. Then, click <kbd>Add</kbd>
+
+![Add new dashboard nodered setup](/static/blog/nodered-started-esp32/add-new-dashboard.png)
+
+The added 'Home' dashboard will be auto-selected in the **Tab** field, click on <kbd>Add</kbd> to accept.
+
+![Dashboard config node](/static/blog/nodered-started-esp32/dashbord-config-node.png)
+
+Similarly, in the **Group** section, the added group will be auto-selected. You can change the label to something meaningful,
+for example: `LED Status`. Click on <kbd>Done</kbd> to finish editing.
+
+![nodered text config](/static/blog/nodered-started-esp32/dashboard-text-node-config.png)
+
+In the upper right corner of the screen, click on the <kbd>Deploy</kbd> button to save and deploy your flow.
+
+![Nodered deploy button](/static/blog/nodered-started-esp32/node-red-deploy-button.png)
+
+A message 'Successfully deployed' will be shown.
+
+On the left sidebar, click on the little dropdown arrow to expand the selection. Find **Dashboard** and click it.
+
+![Opening dashboard](/static/blog/nodered-started-esp32/opening-dashboard.png)
+
+Click on the arrow button to open the dashboard
+
+![Open dashboard button](/static/blog/nodered-started-esp32/open-dashboard-button.png)
+
+Your dashboard will be opened in the new tab. The LED status text may be empty or showing some other values. This is because
+we haven't set up our ESP32 to publish message to this topic yet.
+
+![Dashboard LED status](/static/blog/nodered-started-esp32/dashboard-led-status.png)
+
+<Admonition type="tip">
+  The dashboard is super customizable. For example, you can change the theme (light/dark), icons,
+  fonts, layout etc.
+</Admonition>
+
+## Now to the ESP32
+
+Open Arduino IDE.
 
 ## References
 
