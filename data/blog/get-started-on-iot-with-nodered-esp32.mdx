@@ -1,0 +1,133 @@
+---
+title: Get started on IoT with Node-RED & ESP32
+date: '2023-01-30'
+tags: ['mqtt', 'iot', 'node-red', 'esp32', 'tutorial']
+draft: false
+summary: Learn to create an IoT project using Node-RED, ESP32 & MQTT. Control devices and synchronize LED status with Node-RED dashboard over the internet
+images: []
+layout: PostLayout
+canonicalUrl:
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+
+The Internet of Things (IoT) is revolutionizing the way we interact with devices and the world around us. With the rise of connected devices, it has never been easier to control and monitor your devices remotely. In this tutorial, I will show you how to get started on IoT with Node-RED, ESP32 and MQTT. Using these powerful tools, you will be able to control devices and synchronize LED status with Node-RED dashboard over the internet. I will take you step-by-step through the process of setting up your ESP32, connecting it to the internet, and using Node-RED to control and monitor your devices. This tutorial is perfect for anyone who is new to IoT and wants to learn how to create interactive projects using Node-RED, ESP32, and MQTT.
+
+## Prerequisites
+
+Before we begin, please prepare your machine with the following tools:
+
+- [nvm](https://github.com/coreybutler/nvm-windows) and [nodejs](https://nodejs.org/en/) (16.x is [recommended](https://nodered.org/docs/faq/node-versions), but I'm using 18.x)
+- [Arduino IDE](https://www.arduino.cc/en/software/) (That are ready for ESP32 boards development)
+- [ESP32](https://my.cytron.io/p-nodemcu-esp32?ref=99Y7TxrNIn6Jo) (ESP8266 theoretically can also work, some minor changes to the code may be needed)
+
+## Installing Node-RED
+
+There are [many method](https://nodered.org/docs/getting-started/) to run a Node-RED instances (eg, in cloud, local, or Raspberry Pi). I'm going to choose the local method.
+
+<Admonition type="note">
+  I'm using **Windows** OS. So, if you're using other than Windows, some command/software might
+  works a bit different. Please refer to the official documentation.
+</Admonition>
+
+Fire up your Terminal and run the command below to download and install Node-RED.
+
+```
+npm install -g --unsafe-perm node-red
+```
+
+Once Node-RED is successfully installed, you ca start the instance by running:
+
+```
+node-red
+```
+
+It will take a few seconds to start.
+
+[//]: # 'letak gambar nodered-started'
+
+Once started. Open the instance link (eg: `http://127.0.0.1:1880/`) in the browser. You should see something like this:
+
+[//]: # 'letak gambar nodered-welcome'
+
+<Admonition type="warning">Don't kill/close your Terminal while Node-RED is running</Admonition>
+
+## Designing flow
+
+> A flow is represented as a tab within the editor workspace and is the main way to organise nodes.
+
+When you first started, it will start with **Flow 1**. We will define the nodes, workflow, etc. for a program
+to run in this flow.
+
+You can drag and drop node from the left bar to the canvas. We'll begin by adding MQTT nodes to the flow
+
+### Adding MQTT
+
+<Admonition type='tip' title={'learn'}>
+    **MQTT (Message Queuing Telemetry Transport)** is a lightweight, publish-subscribe network protocol used in IoT
+    (Internet of Things) to facilitate communication between devices. It allows devices to send and receive messages
+    through a broker, which acts as a central hub to route messages between devices based on their topics.
+    MQTT is designed to be efficient, reliable, and easy to implement, making it a popular choice for IoT applications
+    that require a low-bandwidth communication protocol.
+
+    ![MQTT Diagram](https://mqtt.org/assets/img/mqtt-publish-subscribe.png)
+    *Image credit: https://mqtt.org/*
+
+</Admonition>
+
+Search for `mqtt` in the left sidebar. Drag the **mqtt in** nodes to your flow.
+
+[//]: # 'add add-mqtt'
+
+Double-click the added nodes to edit its configuration.
+
+[//]: # 'add image edit mqtt node'
+
+To use MQTT, we need a broker and topic.
+
+If you're unfamiliar, **broker** is a server that facilitates communication between IoT devices. It receives published
+messages from devices, and then routes those messages to other devices that have subscribed to the same topic. The
+**topic** is a string identifier used to categorize and filter messages so that they can be efficiently routed to
+the correct devices.
+
+We can set up the broker on our own, but it is much easier to use the public and free broker provided by some companies
+or organizations. In this article, I'm going to use [HiveMq's public MQTT broker](https://www.hivemq.com/public-mqtt-broker/).
+
+On the Server field, click the pencil icon to add a new MQTT broker. Add `broker.hivemq.com` to the URL field. Leave the
+other fields as it is.
+
+[//]: # 'letak gambar mqtt broker field'
+
+Click the <kbd>Add</kbd> button.
+
+Now, for the topic, we can give any String values. Let's put `mynode/led1`. For QoS, we will leave it as default.
+
+<Admonition type="tip" title={'learn'}>
+  **QoS** or **(Quality of Service)** is a property of MQTT that determines the reliability and
+  speed of message delivery between devices. If you're interested, you can read details
+  [here](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/).
+</Admonition>
+
+[//]: # 'letak gambar dah siap setup'
+
+Click <kbd>Done</kbd> to finish editing.
+
+Now, we want to show the received message in a UI Dashboard. The Dashboard plugin isn't installed by default so we need to
+install it first.
+
+### Installing Node Dashboard
+
+In the upper right corner of the dashboard, click the hamburger menu > **Manage palettes**.
+
+Click on the Install tab and search for `node-red-dashboard`. Install the first top most result you see (Some warning dialog maybe shown, just click Install).
+
+[//]: # 'letak gambar manage-palettes (xingat)'
+
+After installation. Close the manage palettes dialog. You can now see the **Dashboard** nodes from the nodes list.
+
+[//]: # 'letak gambar sidebar'
+
+## References
+
+- https://nodered.org/docs/getting-started/local
