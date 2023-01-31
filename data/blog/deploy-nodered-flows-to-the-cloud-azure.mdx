@@ -1,0 +1,38 @@
+---
+title: Deploy Node-RED flows to the Cloud (Azure)
+date: '2023-02-08'
+tags: ['node-red', 'azure', 'cloud', 'iot', 'tutorial', 'putty']
+draft: false
+summary: Ditch your PC! Learn how to host your Node-RED flows in the cloud with Microsoft Azure
+images: []
+layout: PostLayout
+authors: ['default']
+---
+
+import Admonition from 'react-admonitions'
+
+In this tutorial, we will deploy Node-RED flows we've created [before](../get-started-on-iot-with-nodered-esp32) to
+the cloud using [Microsoft Azure](https://azure.microsoft.com/en-us). By hosting our Node-RED flows in the cloud,
+we can control remotely and access the data from anywhere. This guide will take you step-by-step through the process
+of deploying your Node-RED flows to Azure, and provide you with the knowledge and skills to start building your
+own cloud-based IoT solutions.
+
+## Prerequisites
+
+- Laptop (Whichever OS, but I'm using Windows)
+- [PuTTY](https://www.putty.org/) - SSH Client
+- Microsoft Azure account
+
+<Admonition type="tip">
+  If possible, register to the Azure account as
+  [student](https://azure.microsoft.com/en-us/free/students/) to claim the free $100 credit.
+</Admonition>
+
+## Create a new Virtual Machine (VM) instances
+
+Virtual machine is basically a computer that lives in Azure infrastructure. Open [Azure portal](https://portal.azure.com/#home)
+and click on **Virtual Machine**.
+
+![Azure Virtual Machine selector](/static/blog/nodered-azure/azure-portal-vm.png)
+
+![Azure VM Sizes and pricing](/static/blog/nodered-azure/azure-select-vm-size.png)
