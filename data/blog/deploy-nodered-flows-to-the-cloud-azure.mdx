@@ -35,4 +35,105 @@ and click on **Virtual Machine**.
 
 ![Azure Virtual Machine selector](/static/blog/nodered-azure/azure-portal-vm.png)
 
-![Azure VM Sizes and pricing](/static/blog/nodered-azure/azure-select-vm-size.png)
+Click on Create > **Azure virtual machine** on the dropdown menu.
+
+![Create Azure VM](/static/blog/nodered-azure/create-azure-vm.png)
+
+In the Create a virtual machine form, fill in the particulars. Below are some important info you need to fill.
+
+| Item                  | Description                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Resource group        | Create new or select existing resources                                                                                                                                                                                                                                                                                                                           |
+| Virtual machine name  | Give any name. Eg: `my-node-red-vm`                                                                                                                                                                                                                                                                                                                               |
+| Image                 | `Ubuntu Server 20.04 LTS` (Ubuntu 18.04 will cause some issue when installing node) ![Select Ubuntu Server 20.04](/static/blog/nodered-azure/ubuntu-server-2004.png)                                                                                                                                                                                              |
+| Size                  | The [docs](https://nodered.org/docs/getting-started/azure) suggest `A1 Basic`, but I couldn't find it. So, I'll go with `Standard_B1s`. _Keep in mind that Node.js operates on a single thread, so having multiple cores in a Node-RED instance will not bring any advantage._ ![Azure VM Sizes and pricing](/static/blog/nodered-azure/azure-select-vm-size.png) |
+| Administrator account | You can leave it as default ![Azure Administrator account](/static/blog/nodered-azure/azure-administrator-account.png)                                                                                                                                                                                                                                            |
+| Inbound port rules    | Leave it as default ![Azure Inbound Rules](/static/blog/nodered-azure/azure-inbound-rules.png)                                                                                                                                                                                                                                                                    |
+
+Next, go to the **Networking tab**.
+
+![Networking tab](/static/blog/nodered-azure/networking-tab.png)
+
+in the **NIC network security group**, change the option from Basic to **Advanced**. Then, in the
+**Configure network security group**, click on <kbd>Create new</kbd>.
+
+![NIC Advanced option](/static/blog/nodered-azure/nic-advanced.png)
+
+Click on <kbd>+ Add an inbound rule</kbd>. Set the value as follows:
+
+| Item                    | Values                          |
+| ----------------------- | ------------------------------- |
+| Destination port ranges | `1880`                          |
+| Protocol                | TCP                             |
+| Priority                | `1010`                          |
+| Name                    | Any name. Eg: `node-red-editor` |
+
+Click <kbd>Add</kbd>. You should see your new rule is added to the **Inbound rules**. Click on <kbd>OK</kbd>.
+
+Then, click on <kbd>Review + create</kbd> to finalize your VM creation.
+
+![Azure review](/static/blog/nodered-azure/azure-review-create.png)
+
+In will take a moment to validate the information. Once it's done, click on <kbd>Create</kbd>. A dialog **Generate new key pair**
+should pop out to let you download your private key. Go ahead and click on the <kbd>Download private key and create
+resources</kbd>.
+
+![Azure download key pair](/static/blog/nodered-azure/azure-validation-passed-key-pair.png)
+
+A `.pem` file will be downloaded, and Azure deployment worker will start kicked in to start your VM deployment. You can see the progress from
+the notification panel. Once it's done, click on <kbd>Go to resource</kbd> to view your freshly created VM.
+
+Then, go to **Connect**, copy the `<username>@<public ip address>` from the example command.
+
+![Azure VM Connect SSH](/static/blog/nodered-azure/azure-vm-connect-ssh.png)
+
+## Accessing your VM's Shell
+
+### Key conversion
+
+We'll be using PuTTY go access your VM. But, first, we are first going to convert the downloaded `.pem` file into something that
+PuTTY can understand. Open **PuTTYgen** to get started.
+
+![PuTTY gen](/static/blog/nodered-azure/puttygen-start-menu.png)
+
+In the PuTTYgen window, click on Conversion > Import key. Import the `.pem` file we've downloaded from the Azure portal before.
+PuTTYgen should be able to read it.
+
+Then, click <kbd>Save private key</kbd>.
+
+![Putty save private key](/static/blog/nodered-azure/putty-save-private-key.png)
+
+A warning dialog may appear, just click <kbd>Yes</kbd> to proceed. Save it anywhere on your computer. Note that the
+converted file will be saved as `.ppk`.
+
+You can now close PuTTYgen.
+
+### Establishing connection
+
+Now, open the main PuTTY app. Click on Connection > SSH > Auth > Credentials.
+
+In the **Private key file for authentication**, browse the generated `.ppk` file we've generated before.
+
+![PuTTY SSH auth](/static/blog/nodered-azure/putty-config-ssh.png)
+
+Go back to **Session**, in the **Host name** textbox, paste the `<username>@<public ip address>` that we've copied from Azure
+portal before. Leave other settings as default and click on <kbd>Open</kbd>.
+
+![Putty init session](/static/blog/nodered-azure/putty-config-session.png)
+
+A warning dialog might be appeared, click on <kbd>Accept</kbd> to proceed.
+
+PuTTY will connect you to the Azure VM. Within a few seconds, BOOM! 💥. We've gain access
+to our VM's Shell. You can verify by typing command `uname -a` to get the OS information.
+
+![putty Uname Azure](/static/blog/nodered-azure/putty-uname.png)
+
+## Install Node-RED
+
+```bash
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+```
+
+## References
+
+- https://nodered.org/docs/getting-started/azure
