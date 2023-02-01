@@ -83,7 +83,8 @@ resources</kbd>.
 A `.pem` file will be downloaded, and Azure deployment worker will start kicked in to start your VM deployment. You can see the progress from
 the notification panel. Once it's done, click on <kbd>Go to resource</kbd> to view your freshly created VM.
 
-Then, go to **Connect**, copy the `<username>@<public ip address>` from the example command.
+Then, go to **Connect**, copy the `<username>@<public ip address>` from the example command. For example, mine is
+`azureuser@20.115.54.38`.
 
 ![Azure VM Connect SSH](/static/blog/nodered-azure/azure-vm-connect-ssh.png)
 
@@ -130,9 +131,39 @@ to our VM's Shell. You can verify by typing command `uname -a` to get the OS inf
 
 ## Install Node-RED
 
+First, install the [recommended](https://nodered.org/docs/faq/node-versions) version of Node to the machine.
+
 ```bash
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs build-essential
 ```
+
+Then, install Node-RED
+
+```bash
+sudo npm install -g --unsafe-perm node-red
+```
+
+## Open Node-RED
+
+Now, Node-RED is ready to be started. Run:
+
+```bash
+node-red
+```
+
+![Node RED started](/static/blog/nodered-azure/console-node-red.png)
+
+After it has been started, open your **browser** and go to `<public ip address>:1880`. For example, mine is `20.115.54.38:1880`.
+
+<Admonition type="tip">
+  You can find your public IP address from the [Azure
+  Portal](/static/blog/nodered-azure/azure-vm-public-ip.png).
+</Admonition>
+
+With that, you now have the Node-RED **running** on your Azure cloud infrastructure 🎉.
+
+![NodeRED on cloud Azure](/static/blog/nodered-azure/node-red-welcome.png)
 
 ## References
 
