@@ -25,7 +25,8 @@ own cloud-based IoT solutions.
 
 <Admonition type="tip">
   If possible, register to the Azure account as
-  [student](https://azure.microsoft.com/en-us/free/students/) to claim the free $100 credit.
+  [student](https://azure.microsoft.com/en-us/free/students/) to claim the free [$100
+  credit](https://twitter.com/iqfareez/status/1620274582400954370?s=20&t=H302GPqXBl3cTJlAznxnrg).
 </Admonition>
 
 ## Create a new Virtual Machine (VM) instances
@@ -117,12 +118,22 @@ In the **Private key file for authentication**, browse the generated `.ppk` file
 
 ![PuTTY SSH auth](/static/blog/nodered-azure/putty-config-ssh.png)
 
+<Admonition type="note">
+  It is also possible to generate the key pair using PuTTY, and then give your public key to the VM.
+  Read more [here](https://help.thorntech.com/docs/sftp-gateway-azure/azure-ssh-using-putty/).
+</Admonition>
+
 Go back to **Session**, in the **Host name** textbox, paste the `<username>@<public ip address>` that we've copied from Azure
 portal before. Leave other settings as default and click on <kbd>Open</kbd>.
 
 ![Putty init session](/static/blog/nodered-azure/putty-config-session.png)
 
 A warning dialog might be appeared, click on <kbd>Accept</kbd> to proceed.
+
+<Admonition type="tip">
+  You may wanted save the PuTTY session, so next time you want to access the Shell, just load the
+  session from disk
+</Admonition>
 
 PuTTY will connect you to the Azure VM. Within a few seconds, BOOM! 💥. We've gain access
 to our VM's Shell. You can verify by typing command `uname -a` to get the OS information.
@@ -157,13 +168,57 @@ node-red
 After it has been started, open your **browser** and go to `<public ip address>:1880`. For example, mine is `20.115.54.38:1880`.
 
 <Admonition type="tip">
-  You can find your public IP address from the [Azure
-  Portal](/static/blog/nodered-azure/azure-vm-public-ip.png).
+  You can find your public IP address from the Azure Portal (in
+  [here](/static/blog/nodered-azure/azure-vm-public-ip.png)) or using command like
+  [here](https://stackoverflow.com/a/34567038/13617136)
 </Admonition>
 
 With that, you now have the Node-RED **running** on your Azure cloud infrastructure 🎉.
 
 ![NodeRED on cloud Azure](/static/blog/nodered-azure/node-red-welcome.png)
+
+## Import existing flows to Node-RED
+
+At this point, you already can start to design your flows and can deploy instantly at the cloud. But, if you already have developed
+a flows before this locally, why not just bringing the flows to the other machine.
+
+Before we proceed, let's define:
+
+- Local Node-RED : Node-RED instance that we run on our local machine
+- Cloud Node-RED : Node-RED instance that we've just deployed to the Azure VM
+
+<Admonition type="note">
+  The steps outlined here is similar then you wnat to transfer the Node-RED flows from one machine
+  to another
+</Admonition>
+
+We'll need our exported `.json` file first (learn how to export Node-RED flows to JSON is [previous article](../get-started-on-iot-with-nodered-esp32#export-flows)).
+
+Then, we'll need to list out the palettes used in the current flows because we'll need to install them. So, on the Local Node-RED > Menu > Manage Palettes. Take
+notes of the installed palettes. In my case, I only have one additional palettes: `node-red-dashboard`.
+
+![Nodered palettes installed](/static/blog/nodered-azure/local-node-red-palettes.png)
+
+Now, back to Cloud Node-RED, click on Menu > Manage Palettes > Install to install all palettes you need.
+
+Then, click on Menu > Import. You can paste the json content or import the `.json` file. Then, click on <kbd>Import</kbd>.
+
+![Nodered import json dialog](/static/blog/nodered-azure/nodered-import-json.png)
+
+The imported flow will look the same as your local Node-RED's flow.
+
+![Imported flow](/static/blog/nodered-azure/node-red-imported.png)
+
+Finally, hit <kbd>Deploy</kbd> to save and deploy the flows.
+
+## Concluding remarks
+
+That's it. You now can continue to develop your flow on the cloud and deploy it right
+away so that you, or anyone can access it. The process is long, but easy to understand, right? 😉
+
+Remember to watch out your usage to avoid extra charges.
+
+I'm planning to make a YouTube video on this InshaAllah.
 
 ## References
 
