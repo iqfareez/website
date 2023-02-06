@@ -120,8 +120,10 @@ npx degit timlrx/tailwind-nextjs-starter-blog#typescript
 
 ## Installation
 
+Using Node 18
+
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
 ## Development
