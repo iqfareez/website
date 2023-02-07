@@ -1,6 +1,6 @@
 ---
 title: Get started on IoT with Node-RED & ESP32
-date: '2023-01-30'
+date: '2023-02-08'
 tags: ['mqtt', 'iot', 'node-red', 'esp32', 'tutorial']
 draft: false
 summary: Learn to create an IoT project using Node-RED, ESP32 & MQTT. Control devices and synchronize LED status with Node-RED dashboard over the internet
@@ -172,7 +172,66 @@ we haven't set up our ESP32 to publish message to this topic yet.
 
 ## Now to the ESP32
 
-Open Arduino IDE.
+Open Arduino IDE. Make sure your IDE is ready for ESP32 development, i.e. the relevant board manager is already set up. If you
+haven't already, please follow this [tutorial](https://example.com)
+
+Then, Install the following library:
+
+[//]: # 'letak gambar library tu'
+
+Then, copy and paste the following code:
+
+```cpp
+#include "EspMQTTClient.h"
+
+#define MYLED 2
+
+EspMQTTClient client(
+  "iqf11",
+  "meow4000",
+  "broker.mqttdashboard.com",  // MQTT Broker server ip
+  "",   // MQTT Username: Can be omitted if not needed
+  "",   // MQTT Password: Can be omitted if not needed
+  "espclientID",     // Client name that uniquely identify your device
+  1883              // The MQTT port, default to 1883. this line can be omitted
+);
+
+void setup()
+{
+  Serial.begin(115200);
+
+  client.enableDebuggingMessages(); // Enable debugging messages sent to serial output
+
+  pinMode(MYLED, OUTPUT);
+
+}
+
+// This function is called once everything is connected (Wifi and MQTT)
+// You can add subscription here
+void onConnectionEstablished()
+{
+  Serial.println("Connection established..");
+  // Subscribe to "mytopic/test" and display received message to Serial
+  // client.subscribe("mytopic/test", [](const String & payload) {
+  //   Serial.println(payload);
+  // });
+}
+
+int led_state = HIGH;
+
+void loop()
+{
+  client.loop();
+
+  delay(2000);
+
+  led_state = !led_state; // change state
+  digitalWrite(MYLED ,led_state);
+   // Publish a message to
+  client.publish("mynode/led1", String(led_state));
+}
+
+```
 
 ## References
 
