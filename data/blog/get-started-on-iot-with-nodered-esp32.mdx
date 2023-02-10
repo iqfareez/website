@@ -12,7 +12,14 @@ authors: ['default']
 
 import Admonition from 'react-admonitions'
 
-The Internet of Things (IoT) is revolutionizing the way we interact with devices and the world around us. With the rise of connected devices, it has never been easier to control and monitor your devices remotely. In this tutorial, I will show you how to get started on IoT with Node-RED, ESP32 and MQTT. Using these powerful tools, you will be able to control devices and synchronize LED status with Node-RED dashboard over the internet. I will take you step-by-step through the process of setting up your ESP32, connecting it to the internet, and using Node-RED to control and monitor your devices. This tutorial is perfect for anyone who is new to IoT and wants to learn how to create interactive projects using Node-RED, ESP32, and MQTT.
+The Internet of Things (IoT) is revolutionizing the way we interact with devices and the world around us. With the rise
+of connected devices, it has never been easier to control and monitor your devices remotely. In this tutorial, I will
+show you how to get started on IoT with Node-RED, ESP32 and MQTT. I will take you step-by-step through the
+process of setting up your ESP32, connecting it to the internet, and using Node-RED to control and monitor your devices.
+This tutorial is perfect for anyone who is new to IoT and wants to learn how to create interactive projects using Node-RED,
+ESP32, and MQTT.
+
+In this tutorial, we are going to make LED blink on ESP32 and sync the status to the Node-RED dashboard. Let's get onboard!
 
 ## Prerequisites
 
@@ -173,66 +180,102 @@ we haven't set up our ESP32 to publish message to this topic yet.
 ## Now to the ESP32
 
 Open Arduino IDE. Make sure your IDE is ready for ESP32 development, i.e. the relevant board manager is already set up. If you
-haven't already, please follow this [tutorial](https://example.com)
+haven't already, please follow this [tutorial](https://example.com).
 
-Then, Install the following library:
+Then, install the following library: [**EspMQTTClient**](https://github.com/plapointe6/EspMQTTClient) by Patrick Lapointe.
 
-[//]: # 'letak gambar library tu'
+![Arduino add library EspMQTTClient](/static/blog/nodered-started-esp32/esp-mqtt-client-arduino.png)
 
-Then, copy and paste the following code:
+Then, copy and paste the following code (adapted from the library's [example](https://github.com/plapointe6/EspMQTTClient/blob/master/examples/SimpleMQTTClient/SimpleMQTTClient.ino)):
 
 ```cpp
 #include "EspMQTTClient.h"
 
-#define MYLED 2
+#define MYLED 2  // Built-in LED Pin
 
 EspMQTTClient client(
-  "iqf11",
-  "meow4000",
+  "iqf11",                     // wifi SSID
+  "meow4000",                  // wifi password
   "broker.mqttdashboard.com",  // MQTT Broker server ip
-  "",   // MQTT Username: Can be omitted if not needed
-  "",   // MQTT Password: Can be omitted if not needed
-  "espclientID",     // Client name that uniquely identify your device
-  1883              // The MQTT port, default to 1883. this line can be omitted
+  "",                          // MQTT Username: Can be omitted if not needed
+  "",                          // MQTT Password: Can be omitted if not needed
+  "espclientID",               // Client name that uniquely identify your device
+  1883                         // The MQTT port, default to 1883. this line can be omitted
 );
 
-void setup()
-{
+void setup() {
   Serial.begin(115200);
 
-  client.enableDebuggingMessages(); // Enable debugging messages sent to serial output
-
+  client.enableDebuggingMessages();  // Enable debugging messages sent to serial output
   pinMode(MYLED, OUTPUT);
-
 }
 
 // This function is called once everything is connected (Wifi and MQTT)
 // You can add subscription here
-void onConnectionEstablished()
-{
+void onConnectionEstablished() {
   Serial.println("Connection established..");
-  // Subscribe to "mytopic/test" and display received message to Serial
-  // client.subscribe("mytopic/test", [](const String & payload) {
-  //   Serial.println(payload);
-  // });
+
+  // you can add topic subscription in this function
 }
 
 int led_state = HIGH;
 
-void loop()
-{
+void loop() {
   client.loop();
 
   delay(2000);
 
-  led_state = !led_state; // change state
-  digitalWrite(MYLED ,led_state);
-   // Publish a message to
+  led_state = !led_state;  // change state
+  digitalWrite(MYLED, led_state);
+  // Publish message
   client.publish("mynode/led1", String(led_state));
 }
-
 ```
+
+Note on the topic `mynode/led1`, it must be same as the topic we set up on the Node-RED [above](#designing-flow).
+
+Connect your board to start uploading. I'm using [ESP32 DOIT Devkit V1](https://my.cytron.io/p-nodemcu-esp32?ref=99Y7TxrNIn6Jo).
+
+![arduino upload](/static/blog/nodered-started-esp32/arduino-ide-arduino.png)
+
+Open the **Serial Monitor** and to see if the board has successfully established connection to the broker and publish the message.
+
+```txt
+WiFi: Connected (226.262000s), ip : 192.168.235.63
+MQTT! Trying to publish when disconnected, skipping.
+MQTT: Connecting to broker "broker.mqttdashboard.com" with client name "espclientID" and username "" ... (228.262000s) - ok. (229.144000s)
+MQTT! Trying to publish when disconnected, skipping.
+Connection established..
+MQTT << [mynode/led1] 1
+MQTT << [mynode/led1] 0
+MQTT << [mynode/led1] 1
+MQTT << [mynode/led1] 0
+...
+```
+
+## Demo
+
+<div style={{ position: 'relative', overflow: 'hidden', width: '100%', paddingTop: '56.25%' }}>
+  <iframe
+    src="https://www.youtube.com/embed/pBPLR3QxKzg"
+    width="100%"
+    height="100%"
+    style={{ position: 'absolute', top: '0', left: '0', right: '0', bottom: '0' }}
+    title="[DEMO] ESP32 HiveMq MQTT Node-RED"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen={true}
+  ></iframe>
+</div>
+
+## Conclusion
+
+You can make the UI more interesting by incorporating [LED indicator](https://flows.nodered.org/node/node-red-contrib-ui-led)
+for example. But, that's it I have time for now. Feel free to post comments to ask any question or you want something to add. In the next tutorial, I'll show how you can deploy
+Node-RED to the remote server (so you don't have to keep your PC on all the time, insyallah)
 
 ## References
 
 - https://nodered.org/docs/getting-started/local
+- https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/
+- https://github.com/plapointe6/EspMQTTClient
