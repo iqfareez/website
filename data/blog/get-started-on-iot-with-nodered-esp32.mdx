@@ -11,6 +11,7 @@ authors: ['default']
 ---
 
 import Admonition from 'react-admonitions'
+import { Mermaid } from 'mdx-mermaid/Mermaid'
 
 The Internet of Things (IoT) is revolutionizing the way we interact with devices and the world around us. With the rise
 of connected devices, it has never been easier to control and monitor your devices remotely. In this tutorial, I will
@@ -231,6 +232,22 @@ void loop() {
   client.publish("mynode/led1", String(led_state));
 }
 ```
+
+Below is the overall working principle of our sketch.
+
+<Mermaid
+  chart={`graph LR;
+  A[Connect to Wifi & MQTT Broker]
+  B[Subscribe to topic]
+  C[LED toggle]
+  D[Publish MQTT Message]
+  A --> B
+  B --> C
+  C --> D
+  D --> C
+  B -->|failed| A
+`}
+/>
 
 Note on the topic `mynode/led1`, it must be same as the topic we set up on the Node-RED [above](#designing-flow).
 
