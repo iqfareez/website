@@ -74,6 +74,16 @@ module.exports = withBundleAnalyzer({
         permanent: true,
       },
       {
+        source: '/call',
+        destination: 'tel:+60193988956',
+        permanent: true,
+      },
+      {
+        source: '/gh',
+        destination: 'https://github.com/iqfareez',
+        permanent: true,
+      },
+      {
         source: '/resume',
         destination:
           'https://drive.google.com/file/d/1H9B--KMDip0EbRZVBWuLvlQO9Q4lLlD7/view?usp=sharing',
