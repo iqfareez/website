@@ -1,6 +1,6 @@
 ---
 title: Deploy Node-RED flows to the Cloud (Azure)
-date: '2023-02-08'
+date: '2023-02-13'
 tags: ['node-red', 'azure', 'cloud', 'iot', 'tutorial', 'putty']
 draft: false
 summary: Ditch your PC! Learn how to host your Node-RED flows in the cloud with Microsoft Azure
@@ -10,6 +10,7 @@ authors: ['default']
 ---
 
 import Admonition from 'react-admonitions'
+import ReactPlayer from 'react-player/lazy'
 
 In this tutorial, we will deploy Node-RED flows we've created [before](../get-started-on-iot-with-nodered-esp32) to
 the cloud using [Microsoft Azure](https://azure.microsoft.com/en-us). By hosting our Node-RED flows in the cloud,
@@ -211,15 +212,28 @@ The imported flow will look the same as your local Node-RED's flow.
 
 Finally, hit <kbd>Deploy</kbd> to save and deploy the flows.
 
+Open the dashboard UI, connect ESP32 like we did before and the result is something similar below:
+
+<ReactPlayer url="https://i.imgur.com/aQmba1Q.mp4" playing={true} controls={true} />
+
+Notice that there are few milliseconds delay between ESP32 and the Node-RED dashboard. Perhaps because we are using free public
+mqtt broker, so the connection speed is throttled.
+
+<Admonition type={'important'} title={'shameless plug'}>
+  I made the Serial Monitor application that you see above. It is called **SeriLink**. Learn more
+  [here](https://github.com/iqfareez/SeriLink).
+</Admonition>
+
 ## Concluding remarks
 
 That's it. You now can continue to develop your flow on the cloud and deploy it right
 away so that you, or anyone can access it. The process is long, but easy to understand, right? 😉
 
-Remember to watch out your usage to avoid extra charges.
+Remember to watch out your Azure usages & quotas to avoid extra charges.
 
-I'm planning to make a YouTube video on this InshaAllah.
+You may ask, how do I want to do similar like this using AWS? IMO, the process maybe similar here and there. Just try that out. If I have time,
+I want to make a YouTube tutorial InshaAllah.
 
 ## References
 
-- https://nodered.org/docs/getting-started/azure
+- https://portal.azure.com/
