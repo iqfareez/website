@@ -20,8 +20,7 @@ own cloud-based IoT solutions.
 
 ## Prerequisites
 
-- Laptop (Whichever OS, but I'm using Windows)
-- [PuTTY](https://www.putty.org/) - SSH Client
+- SSH Client - Eg: [PuTTY](https://www.putty.org/)
 - Microsoft Azure account
 
 <Admonition type="tip">
@@ -94,6 +93,12 @@ Then, go to **Connect**, copy the `<username>@<public ip address>` from the exam
 
 ### Key conversion
 
+<Admonition type={'note'}>
+  As soon I finish writing this tutorial, I realized that you can connect to the VM's shell by just
+  using PowerShell on Windows (on Linux/MacOS, I know they have CLI ssh). Demo video
+  [here](https://youtu.be/un-MObQ5_Bo).
+</Admonition>
+
 We'll be using PuTTY go access your VM. But, first, we are first going to convert the downloaded `.pem` file into something that
 PuTTY can understand. Open **PuTTYgen** to get started.
 
@@ -132,7 +137,7 @@ portal before. Leave other settings as default and click on <kbd>Open</kbd>.
 A warning dialog might be appeared, click on <kbd>Accept</kbd> to proceed.
 
 <Admonition type="tip">
-  You may wanted save the PuTTY session, so next time you want to access the Shell, just load the
+  You may wanted to save the PuTTY session, so next time you want to access the Shell, just load the
   session from disk
 </Admonition>
 
@@ -180,10 +185,10 @@ With that, you now have the Node-RED **running** on your Azure cloud infrastruct
 
 ![NodeRED on cloud Azure](/static/blog/nodered-azure/node-red-welcome.png)
 
-## Import existing flows to Node-RED
-
 At this point, you already can start to design your flows and can deploy instantly at the cloud. But, if you already have developed
-a flows before this locally, why not just bringing the flows to the other machine.
+a flows before this locally, why not just importing the flows to the Azure VM? Continue reading...
+
+## Import existing flows to Node-RED
 
 Before we proceed, let's define:
 
