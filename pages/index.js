@@ -1,6 +1,5 @@
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
-import Banner from '@/components/Banner'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
@@ -24,7 +23,6 @@ export default function Home({ posts }) {
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <Banner />
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h1
             className={`mb-8 bg-clip-text text-4xl font-extrabold leading-[60px] tracking-tight text-transparent ${headingColorClass} md:text-7xl md:leading-[86px]`}
