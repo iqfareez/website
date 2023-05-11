@@ -1,9 +1,16 @@
 {
-  "grammarly.selectors": [
-    {
-      "language": "mdx",
-      "scheme": "file",
-      "pattern": "data/blog/hacking-wifi-captive-portal-1.mdx"
-    }
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.options": {
+    "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]
+  },
+  "eslint.validate": [
+    "markdown",
+    "mdx",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
   ]
 }
