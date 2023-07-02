@@ -9,19 +9,46 @@ layout: PostSimple
 authors: ['default']
 ---
 
+import Admonition from 'react-admonitions'
+
 When the list of titles for the final year project (fyp) released for us to select, there were several titles that I was interested in. But, seeing the title
-"Development of turn-by-turn navigation in Kulliyyah of Engineering building" have caught my eyes. Because the nature of myself
+**"Development of turn-by-turn navigation in Kulliyyah of Engineering (KOE) building"** have caught my eyes. Because the nature of myself
 leaning towards software development, I thought this project would be a good fit for me.
 
-_For mechatronics juniors, here is the list of titles, for your reference_
+![Fyp released title my title](/static/blog/fyp-post-mortem/fyp-my-title-list.png)
+
+<Admonition type="tip">
+  For mechatronics juniors, [click
+  here](https://docs.google.com/spreadsheets/d/1m3WvIcbPspN9yIdeG3P7v3xT2gXILNqg/edit?usp=sharing&ouid=100112357446104260446&rtpof=true&sd=true)
+  to view the list of FYP titles during my time for your reference (Lecturer's names and emails are
+  redacted for privacy)
+</Admonition>
 
 Upon further meeting with my supervisor, the requirements have been refined as follows:
 
 - Develop a **mobile application using Unity** with AR Foundation for the navigation system.
 - Localization system using **natural landmark detection** - Visual based without use of markers like QR code or something.
 
-One student from last year (2021/2022) fyp, Hidayat Sohif have done similar project, but with different objectives (See [Post 1](https://www.linkedin.com/posts/azharmohdibrahim_augmentedreality-indoornavigation-fuzzylogic-activity-7023879916509163520-MFKK?utm_source=share&utm_medium=member_desktop) & [Post 2](https://www.linkedin.com/posts/azharmohdibrahim_koe-iium-activity-7051446897596645376-bdsY?utm_source=share&utm_medium=member_desktop)).
-The navigation system is quite the similar, but the localization system is different. He used QR code as the marker for the localization system, meanwhile I'm using features that are already exist in the building.
+One student from last year (2021/2022) FYP's, Hidayat Sohif have done similar project, but with different objectives (See [Post 1](https://www.linkedin.com/posts/azharmohdibrahim_augmentedreality-indoornavigation-fuzzylogic-activity-7023879916509163520-MFKK?utm_source=share&utm_medium=member_desktop) & [Post 2](https://www.linkedin.com/posts/azharmohdibrahim_koe-iium-activity-7051446897596645376-bdsY?utm_source=share&utm_medium=member_desktop)).
+The navigation system is quite the similar, but the localization system is different. He used QR code as the marker for the localization system, meanwhile I'm using features that are already exist in the building. See [types of AR navigation](#types-of-ar-navigation).
+
+![Screenshot of Hidayat Sohif's work](/static/blog/fyp-post-mortem/screenshot-hidayat-sohif-AR.png)
+
+## Types of AR navigation
+
+Generally, there are two types of navigation, which are:
+
+- **Location-based** navigation - using GPS
+- **Vision/Visual-based** navigation - using camera
+
+My project is targeted to be used within/inside a building, GPS is not suitable for this project since the walls and building structure
+will disrupt the GPS signal. It is also crucial to ensure the position is accurate within 1-2 meters, which is hard to obtain using
+GPS. So, a suitable option to use indoor is vision-based navigation.
+
+In visual based, there are another two types of localization.
+
+- **Marker-based** - Using markers like QR code, AR tags, etc.
+- **Markerless** - Using features that are already exist in the building.
 
 So far so good, I was excited to start the project. I have learned Unity before, I already understand the basics of it, which give me a good head start.
 
