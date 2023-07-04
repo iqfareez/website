@@ -29,10 +29,18 @@ Upon further meeting with my supervisor, the requirements have been refined as f
 - Develop a **mobile application using Unity** with AR Foundation for the navigation system.
 - Localization system using **natural landmark detection** - Visual based without use of markers like QR code or something.
 
+## Past projects
+
 One student from last year (2021/2022) FYP's, Hidayat Sohif have done similar project, but with different objectives (See [Post 1](https://www.linkedin.com/posts/azharmohdibrahim_augmentedreality-indoornavigation-fuzzylogic-activity-7023879916509163520-MFKK?utm_source=share&utm_medium=member_desktop) & [Post 2](https://www.linkedin.com/posts/azharmohdibrahim_koe-iium-activity-7051446897596645376-bdsY?utm_source=share&utm_medium=member_desktop)).
 The navigation system is quite the similar, but the localization system is different. He used QR code as the marker for the localization system, meanwhile I'm using features that are already exist in the building. See [types of AR navigation](#types-of-ar-navigation).
 
 ![Screenshot of Hidayat Sohif's work](/static/blog/fyp-post-mortem/screenshot-hidayat-sohif-AR.png)
+
+I also found a good working demo of [indoor navigation with AR in a hospital](https://youtu.be/CGphw9r__5k) by [Joshua Drewlow](https://www.linkedin.com/in/joshua-drewlow/). He
+explained greatly the [development process](https://www.youtube.com/playlist?list=PLcYgptwJHxUE7Q9ymWEX0zDs3SDgMarxu). I can follow his methods right? Haha no becase they used
+[Vuforia SDK](https://developer.vuforia.com/) with 3D camera to map the environment which I don't have any of it and it cost a lot of $$$.
+
+After doing some quick Google searches. I found out that not many people have done this project before.
 
 ## Types of AR navigation
 
@@ -51,8 +59,6 @@ In visual based, there are another two types of localization.
 - **Markerless** - Using features that are already exist in the building.
 
 So far so good, I was excited to start the project. I have learned Unity before, I already understand the basics of it, which give me a good head start.
-
-After doing some quick Google searches. I found out that not many people have done this project before.
 
 Lucky for me, there was a good tutorial [on YouTube](https://youtube.com/playlist?list=PLOIYTfRd0Ho7iOI_cnUZxXK6KiCFGhU1s) about developing basic AR navigation system using Unity. The tutorial
 have provided me some basic understanding on how the overall navigation system would work. So, the next part is to develop the localization system.
@@ -90,6 +96,42 @@ using the app.
 ![AR Server codespace](/static/blog/fyp-post-mortem/ar-server-codespace-construction.png)
 
 CKp bersyukur masa saat2 akhir tkade jatuh sakit etc.
+
+I'm glad the examiners liked my project. However, they also have commented on some aspects particularly about the localization
+results.
+
+Below are the real questions asked by the examiners during the presentation:
+
+1. Using your project, I only be able to go from and to the destination that have been listed only. Am I right?
+1. How do you know that the user is in the correct path?
+1. Is the navigation path shown is the optimized shortest path?
+1. Can I navigate between different floors?
+1. How is your project is different from [Hidayat Sohif's project](#past-projects)?
+1. etc.
+
+I am able to answer all the questions asked, because I know what I'm doing, but I don't think it is satisfying enough
+for them.
+
+## Future work
+
+Of course, there was a very big room of improvement for this project to make it production ready.
+
+If time is critical, i.e. you don't want to spent much time on developing the localization system, then you can use
+AR navigation SDK out there, it is just you need a big capital to use it. Below are some examples:
+
+- [Vuforia Engine](https://developer.vuforia.com/)
+- [Wikitude](https://www.wikitude.com/showcase/wikitude-navigation/)
+- [Unity Mars](https://unity.com/products/unity-mars)
+
+If you have time & resources, then you can continue my project by improving the overall system. Here are my suggestions:
+
+- Add more landmark to the localization system
+- Improve the speed of the localization system (need change in both code and hardware)
+- Add accessibility features (ie read out the instruction "turn left", "turn right", etc)
+- Add more features to the app (ie. search for destination, etc)
+- etc.
+
+## Closing thoughts
 
 So, if I were to start over again, I would do the following:
 
