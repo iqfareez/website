@@ -3,17 +3,54 @@ title: Hacking Perodua Bezza
 date: '2023-07-08'
 tags: ['car', 'canbus', 'can', 'arduino', 'bezza']
 draft: false
-summary: Sniff & decipher data from the car ECU through its CanBus interface using Arduino. Just for fun project and shouldn't bring any harm to the car.
+summary: Sniff & decipher data from the car ECU through its CanBus interface using Arduino. Just for fun project and it shouldn't bring any harm to the car.
 images: []
 layout: PostLayout
 canonicalUrl:
 authors: ['default']
 ---
 
-Once the OBD II port is discovered, I can feel my car sweats and anxiety 😆
+import MyCarousel from 'components/MyCarousel.js'
 
-![Obd port bezza location from below](/static/blog/hacking-bezza/obd_bezza_location_1.jpg)
-![Obd port bezza location ultrawide from below](/static/blog/hacking-bezza/obd_bezza_location_2.jpg)
-![Obd port bezza location from front](/static/blog/hacking-bezza/obd_bezza_location_3.jpg)
+My father just give a new car, Perodua Bezza to me ❤️♥️. Alhamdulillah, I couldn't be more grateful! Finally having my own
+car means greater freedom and convenience in getting around, without solely relying on public transportation. Uh hm,
+anyway I'm still interested into **✨Car Hacking✨** that I've been exposed to in my internship. But, what is car hacking?
+Is it about ssh-ing into the car and run a virus in it? 🤔 Nahh..
+
+Car hacking, in its essence, is about exploring the inner workings of a vehicle's electronic systems to extract valuable
+information and unlock its potential. Instead of nefarious activities, it involves tapping into the car's network—specifically
+through the OBD2 port—to intercept and interpret the CANbus signal. This signal carries vital data such as throttle position,
+RPM (revolutions per minute), and much more.
+
+> Uh oh, slow down.. CAN-what and OBD-what ??
+
+CAN stands for **Controller Area Network**. It's a communication protocol that allows different parts of the car to talk to
+each other. It's used by the engine, transmission, brakes, and other systems to communicate with each other. It's also
+used by external devices to communicate with the car's computer, or [ECU](https://www.ecutesting.com/categories/ecu-explained/).
+
+![what is canbus](/static/blog/hacking-bezza/what-is-canbus.png)
+
+OBD stands for **On-Board Diagnostics**. It's a port that allows external devices to connect to the vehicle's internal network.
+It's usually located under the dashboard, near the steering wheel. The OBD port is used by mechanics to diagnose problems
+with the car. Pictures below shows the OBD port location for Perodua Bezza.
+
+<MyCarousel
+  images={[
+    {
+      src: '/static/blog/hacking-bezza/obd_bezza_location_1.jpg',
+      alt: 'OBD port in Perodua Bezza',
+    },
+    {
+      src: '/static/blog/hacking-bezza/obd_bezza_location_2.jpg',
+      alt: 'Same as previous but ultrawide',
+    },
+    {
+      src: '/static/blog/hacking-bezza/obd_bezza_location_3.jpg',
+      alt: "Location of OBD port is below driver's dashboard",
+    },
+  ]}
+/>
+
+Once the OBD II port is discovered, I can feel my car sweats and anxiety 😆
 
 Next, I'm going to buy the tools
