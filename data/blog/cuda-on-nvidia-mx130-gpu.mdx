@@ -78,12 +78,14 @@ False
 
 So, we need to install some tools to make our CUDA visible to PyTorch.
 
-## Install VS Studio
+## Install Visual Studio
 
 You may need to **install** [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) to correctly install CUDA.
 
-But for my case, I don't to install the full VS due to storage constraints, but I have the VS Build Tools already installed with C++ development. I just downloaded
-_Microsoft Visual C++ Redistributable for Visual Studio 2022_ just in case. You can get it from the download page, scroll down to _Other Tools, Frameworks, and Redistributables_.
+<Admonition type="warning">Not to be confused with Visual Studio **Code**</Admonition>
+
+But for my case, I don't install the full VS due to storage constraints, but I have the [VS Build Tools](https://visualstudio.microsoft.com/downloads/?q=build+tools#build-tools-for-visual-studio-2022) already installed with C++ development. I just downloaded
+_Microsoft Visual C++ Redistributable for Visual Studio 2022_ just in case. Visit [Visual Studio download page](https://visualstudio.microsoft.com/downloads/) for more info.
 
 ![VS Redistributable](/static/blog/cuda-mx130/Screenshot_20230128_042249.png)
 
@@ -91,7 +93,7 @@ _Microsoft Visual C++ Redistributable for Visual Studio 2022_ just in case. You 
 
 ### Download supported CUDA version
 
-The latest CUDA version is 12.0. However, PyTorch doesn't support it yet, So, you'll need an older version of CUDA (`11.6` or `11.7`). Go to [Cuda Toolkit Archives](https://developer.nvidia.com/cuda-toolkit-archive)
+The latest CUDA version is 12.0. However (at the time of writing), PyTorch seems doesn't have support for it yet. So, you'll need an older version of CUDA (`11.6` or `11.7`). Go to [Cuda Toolkit Archives](https://developer.nvidia.com/cuda-toolkit-archive)
 to download version `11.7.1`.
 
 You may select Installer Type to **local**, and proceed with downloading.
@@ -140,11 +142,12 @@ pip3 install torch torchvision torchaudio --extra-index-url https://download.pyt
 ```
 
 If you re-run the code [previously](#checking-cuda-availability-using-pytorch). The output should be `True` indicating that
-PyTorch is able to recognise your CUDA GPU.
+PyTorch is now able to recognise the CUDA GPU.
 
 ## Demo
 
-I'm going to demo the machine vision project [SuperGlue Inference and Evaluation Demo Script](https://github.com/magicleap/SuperGluePretrainedNetwork) without CUDA (using CPU and with CUDA running on MX130).
+I'm using the demo of the machine vision project [SuperGlue Inference and Evaluation Demo Script](https://github.com/magicleap/SuperGluePretrainedNetwork)
+without CUDA (using CPU) and with CUDA running on MX130.
 
 <Admonition type="warning">Your result may vary</Admonition>
 
@@ -164,8 +167,8 @@ Average FPS = 0.4
 
 Average FPS = 1.0
 
-The result with CUDA is improves. Please don't expect it to run on higher FPS as the GPU may not capable to deliver
-high intensive calculations.
+The performance with CUDA has improved, but it's important to note that it may not achieve significantly higher FPS due to
+the GPU's limitations in handling intensive calculations.
 
 ## References
 
