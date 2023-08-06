@@ -1,6 +1,6 @@
 ---
 title: 'My final year project: A journey & post mortem'
-date: '2023-07-11'
+date: '2023-08-15'
 tags: ['fyp', 'reflection']
 draft: false
 summary: Finished just-in-time. I wish I had more time to focus on my FYP with less commitment on other things
@@ -12,7 +12,7 @@ authors: ['default']
 import Admonition from 'react-admonitions'
 
 When the list of titles for the final year project (fyp) released for us to select, there were several titles that I was interested in. But, seeing the title
-**"Development of turn-by-turn navigation in Kulliyyah of Engineering (KOE) building"** have caught my eyes. Because the nature of myself
+**"Development of turn-by-turn navigation in Kulliyyah of Engineering (KOE) building using natural landmark detection"** have caught my eyes. Because the nature of myself
 leaning towards software development, I thought this project would be a good fit for me.
 
 ![Fyp released title my title](/static/blog/fyp-post-mortem/fyp-my-title-list.png)
@@ -58,17 +58,43 @@ In visual based, there are another two types of localization.
 - **Marker-based** - Using markers like QR code, AR tags, etc.
 - **Markerless** - Using features that are already exist in the building.
 
-So far so good, I was excited to start the project. I have learned Unity before, I already understand the basics of it, which give me a good head start.
+![markerbased vs markerless example](/static/blog/fyp-post-mortem/markerbased-vs-markerless-comparison.png)
 
-## In semester 1 (FYP 1)
+We are choosing marker-less detection using natural landmark detection. It is more convenient since we don't need to put markers everywhere, but also quite challenging compared
+to marker-based detection.
 
-First I started to understand the navigation system in Unity ie walking etc. There was a good tutorial [on YouTube](https://youtube.com/playlist?list=PLOIYTfRd0Ho7iOI_cnUZxXK6KiCFGhU1s) about developing basic AR navigation system using Unity. The tutorial
+So far so good, I was excited to start the project. We were given two semesters (14 weeks each) to complete the project. I thought it was enough time to complete the project. Let's start!
+
+## In semester 1
+
+I first learnt Unity about 2-3 years ago from this moment. I'm not worry much about learning Unity for my fyp as I quite understand the basics of it. This
+give me an advanced head start compared to my other friends who are not familiar with Unity. It just that, I have totally **no idea** how to
+implement AR in Unity.
+
+AR is not my expertise nor my interest. I have never done any AR projects before. So I look everywhere ie Reddit, StackOverflow, journal sites, YouTube and so much
+more to get the general idea. Luckily I found this [YouTube tutorial](https://youtube.com/playlist?list=PLOIYTfRd0Ho7iOI_cnUZxXK6KiCFGhU1s) on how to develop basic navigation in AR. His
+video is great, demonstrating how to navigate from A to B using QR code as its localization method.
+
+Still completely unclear what I want or need to do, I just throw whatever I think is suitable
+for the presentation slides.
+
+![fy1 slide pp](/static/blog/fyp-post-mortem/presentation-fyp1-pp.png)
+
+Btw, if you're interested, you can get the presentation files (and other related files) in [All files](#all-files) section at the end of this blogpost.
+
+After several weeks, I was able to come up with this:
+
+[//]: # 'TODO: Add video'
+
+First I started to understand the navigation system in Unity ie walking etc. There was a good tutorial [on YouTube]() about developing basic AR navigation system using Unity. The tutorial
 have provided me some basic understanding on how the overall navigation system would work. So, the next part is to develop the localization system.
 
 cerita la sem 1 buat apa sem 2 buat apa
 tunjuk skit result
 
 will disrupt the GPS signal. It is also crucial to ensure the position is accurate within 1-2 meters, which is hard to obtain using
+
+![Unity remote](/static/blog/fyp-post-mortem/unity-remote-yes-phone.jpg)
 
 I wish I have more time and no other commitment to fully commit and enjoy my FYP project.
 aku bnyak program dan projek
@@ -135,11 +161,12 @@ If you have time & resources, then you can continue my project by improving the 
 - Add more features to the app (ie. search for destination, etc)
 - etc.
 
-Some advanced improvements:
+Some more advanced improvements I could think of:
 
 - Employ Wifi access points to improve the localization system within the indoor environment. See repo [Triangulation_script](https://github.com/Batman787/Triangulation_script)
   or [wifi-localisation](https://github.com/yxiao92/wifi-localisation)
--
+  ![image wifi positioning](https://hackster.imgix.net/uploads/attachments/1062768/illustrations_ambient-wifi-site-survey2.jpg?auto=compress%2Cformat&w=830&h=466.875&fit=min&dpr=2.625)
+  _Image credit: [Hackster](https://www.hackster.io/news/indoor-positioning-using-arduino-and-machine-learning-in-4-easy-steps-295d39e5e7c9)_
 
 ## Closing thoughts
 
@@ -149,3 +176,7 @@ So, if I were to start over again, I would do the following:
 - Manage priorities
 - Don't overestimate myself
 - Don't overestimate the time
+
+## All files
+
+- FYP1 Presentation: https://www.slideshare.net/MuhammadFareezIqmal/fyp1-presentation-development-of-interactive-turnbyturn-navigation-in-kulliyyah-of-engineeringpdf
