@@ -1,15 +1,15 @@
 ---
 name: Muhammad Fareez Iqmal
 avatar: /static/images/avatar.png
-occupation: Engineering Student
+occupation: Engineering Graduate
 company: International Islamic University Malaysia
-email: hello@iqfareez.com
+email: m.fareez.iqmal@gmail.com
 twitter: https://twitter.com/iqfareez
 linkedin: https://www.linkedin.com/in/iqfareez
 github: https://github.com/iqfareez
 ---
 
-Fareez is a Mechatronics Engineering student at IIUM Gombak who is passionate about developing mobile applications,
+Fareez is a Mechatronics Engineering graduate from IIUM who is passionate about developing mobile applications, IoT modules, robotics,
 and electronic projects when he has time to spare.
 
 ## Work experiences
