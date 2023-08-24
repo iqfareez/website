@@ -1,6 +1,6 @@
 ---
 title: 'My final year project: A journey & post mortem'
-date: '2023-08-15'
+date: '2023-08-27'
 tags: ['fyp', 'reflection']
 draft: false
 summary: Finished just-in-time. I wish I had more time to focus on my FYP with less commitment on other things
@@ -10,6 +10,7 @@ authors: ['default']
 ---
 
 import Admonition from 'react-admonitions'
+import ReactPlayer from 'react-player/lazy'
 
 When the list of titles for the final year project (fyp) released for us to select, there were several titles that I was interested in. But, seeing the title
 **"Development of turn-by-turn navigation in Kulliyyah of Engineering (KOE) building using natural landmark detection"** have caught my eyes. Because the nature of myself
@@ -67,24 +68,72 @@ So far so good, I was excited to start the project. We were given two semesters 
 
 ## In semester 1
 
+### Research & data collection
+
 I first learnt Unity about 2-3 years ago from this moment. I'm not worry much about learning Unity for my fyp as I quite understand the basics of it. This
-give me an advanced head start compared to my other friends who are not familiar with Unity. It just that, I have totally **no idea** how to
+gives me an advanced head start compared to my other friends who are not familiar with Unity. It just that, I have totally **no idea** how to
 implement AR in Unity.
 
 AR is not my expertise nor my interest. I have never done any AR projects before. So I look everywhere ie Reddit, StackOverflow, journal sites, YouTube and so much
-more to get the general idea. Luckily I found this [YouTube tutorial](https://youtube.com/playlist?list=PLOIYTfRd0Ho7iOI_cnUZxXK6KiCFGhU1s) on how to develop basic navigation in AR. His
-video is great, demonstrating how to navigate from A to B using QR code as its localization method.
+more to get the general idea. [AR Foundation Samples](https://github.com/Unity-Technologies/arfoundation-samples) repo is a great way to start and learn. But, it is not easy to understand.
+
+To reduce the scope, I choose the KOE Building Block E1, Level 2 only. I started to collect image data from the
+building for several pre-determined landmarks to build the localization model. I captured the landmark images from different angles and distances.
+
+![fyp-image-data-collection](/static/blog/fyp-post-mortem/fyp-raw-data-collection.png)
+
+After that, I'm looking for a tool/algorithm to train the data. I had idea to use pytorch or tensorflow, like a normal image classification project. But, upon
+further research, I found a method called [Hierarchical Localization](https://github.com/cvg/Hierarchical-Localization) project to localize the image and predict where the image is. It sounds
+like a suitable method for my AR Navigation project.
+
+I won't go into details on how the Hierarchical Localization works, but in short, it uses a two alogorithm, [SuperPoint](https://arxiv.org/abs/1712.07629) and [SuperGlue](https://psarlin.com/superglue/). SuperPoint is used to extract
+features from the image, while SuperGlue is used to match the features from the image to the map.
+
+![HL pipeline](https://github.com/cvg/Hierarchical-Localization/raw/master/doc/hloc.png)
+
+The project provide a sample code and even a Google Colab script to demonstrate Hierarchical Localization. I yoinked the code and run it on my own image data.
+It works and it looks promising. After this point, I was slowly making progress into finishing the report (part 1) and presentation slides.
+
+### Presentation
 
 Still completely unclear what I want or need to do, I just throw whatever I think is suitable
-for the presentation slides.
+for the presentation slides. Not much I can share about the project progress aside from the research and data collection I did so far. Compare
+to my colleagues, I feel like I quite behind in terms of progress, but I'm not worried much (yeah it's weird, I know).
 
 ![fy1 slide pp](/static/blog/fyp-post-mortem/presentation-fyp1-pp.png)
 
-Btw, if you're interested, you can get the presentation files (and other related files) in [All files](#all-files) section at the end of this blogpost.
+<Admonition type="tip">
+  If you're interested, you can get the presentation files (and other related files) in [All
+  files](#all-files) section at the end of this blogpost.
+</Admonition>
 
-After several weeks, I was able to come up with this:
+On week 15 of the semester, we had a presentation session for FYP 1. Hoping for best and with tawakkal, I presented my project. The presentation
+went well (at least in my opinion).
 
-[//]: # 'TODO: Add video'
+> You're the best presenter I have today
+
+Upon concluding my presentation, to my pleasant surprise, one of the examiners commended me for delivering the best
+presentation of the day _(See image below, first image from left)_. As I was the final presenter during the FYP1 session, receiving such praise from him made me immensely
+proud. Haha, it was truly a delightful moment! (Of course, I'm not the best of all, it's just coincidentally & relatively better that the persons before me)
+
+![fyp1-whatsapp-screenshot](/static/blog/fyp-post-mortem/fyp-screenshots-kawan.png)
+
+Then of course, there is 'sesi bantai-membantai' with the examiners (basically it's just QnA session with some spices 🌶️️), but Alhamdulillah I was able to answer it quite OK.
+
+### Continue the prototype
+
+I found this [YouTube tutorial](https://youtube.com/playlist?list=PLOIYTfRd0Ho7iOI_cnUZxXK6KiCFGhU1s) on how to develop basic navigation in AR. His
+video is great, demonstrating how to navigate from A to B using QR code as its localization method. So, below is the
+early test video of the prototype I made using the tutorial.
+
+<ReactPlayer url="https://i.imgur.com/HqzGfVK.mp4" playing={true} controls={true} />
+
+Hurmm.. Seems like it deosn't align with the room. And even worse, it direct me to the
+window like it asking me to jump off. 😂😂
+
+<ReactPlayer url="https://i.imgur.com/EHLXYfV.mp4" playing={true} controls={true} />
+
+Testing outside my room. But nahh, something's not working correctly.
 
 First I started to understand the navigation system in Unity ie walking etc. There was a good tutorial [on YouTube]() about developing basic AR navigation system using Unity. The tutorial
 have provided me some basic understanding on how the overall navigation system would work. So, the next part is to develop the localization system.
@@ -114,6 +163,28 @@ Point yang nak tulis:
 - Overestimate diri sendiri
 - Overestimate masa
 - Overestimate kemampuan
+
+## In semester 2
+
+When entering semester 2, I realized that I need to complete the project in 15 weeks
+no matter what. So, I target **at least** I touch the project once a week.
+
+Well, guess what? The project was dormant for about 2+ months (~10-ish weeks) 🤡
+
+So, what pro-gamer move that did I did in semester?? Hm, I was so busy. Like super-busy. I
+was involved in several projects and activities. Let me list a few:
+
+[//] # (TODO: Cross check the timeline)
+
+- Entreprenurship Digital Competition - This program take place early in the semester
+- 8 Jam 8 Apps Workshop - This is the first Fluter workshop we plan to conduct for the masses. Of course
+  it took a lot of preparation for meeting and discussion prior to the program. Not to forgot we had to create the module
+  and notes for the workshop (No, I'm not saying that I regret it anyway)
+- Study worload - Yup, similar to the semester 1 problem. The study workload and projects does reduce the chance I can have to
+  do the FYP project
+
+[//] # (TODO: Kaitkan dgn yg atas. Klw ada motivation yang atas tk jadi masalah)
+Aside from that, one major problem that I discovered is I lack of motication.
 
 Tak enjoiy buat, tktau kenapa
 lecturer tak bagi bantuan, tak push
