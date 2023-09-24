@@ -1,0 +1,25 @@
+.aspect-4x3 {
+  padding-bottom: 75%; /* 4:3 aspect ratio */
+  position: relative;
+  overflow: hidden;
+}
+
+.fit-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* or object-fit: contain; depending on your preference */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.thumbnail .keen-slider__slide {
+  margin-top: 10px;
+  height: 100px;
+}
+.thumbnail .keen-slider__slide {
+  cursor: pointer;
+}
+.thumbnail .keen-slider__slide.active {
+  border: 2px dashed black;
+}

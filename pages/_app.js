@@ -2,6 +2,7 @@ import '@/css/tailwind.css'
 import '@/css/prism.css'
 import 'katex/dist/katex.css'
 import 'keen-slider/keen-slider.min.css'
+import '@/css/styles.css'
 
 import '@fontsource/inter/variable-full.css'
 
