@@ -1,5 +1,5 @@
 ---
-title: Dall E-2 vs Dall E-3. Like night and day differences
+title: Dall·E 2 vs Dall·E 3 - Like night and day differences
 date: '2023-11-08'
 tags: ['dall-e3', 'openai', 'ai', 'vision']
 draft: false
@@ -10,37 +10,60 @@ canonicalUrl:
 authors: ['default']
 ---
 
+On September 2023, OpenAI announced new text-to-image model, [Dall·E 3](https://openai.com/dall-e-3). I first got the oppurtunity to try
+Dall e 3 when my company give access to ChatGPT Pro, which include the Dall E 3 model. I am pretty excited because the
+image generated is far better than Dall·E 2 that I've explored with some times ago.
+
+So today, I create a simple [python program](https://github.com/iqfareez/openai-dall-e3) and incorporated the OpenAI's Image Generation API to redo the prompt from
+previous Dall·E 2 experiment. Note that the Dall·E 2 images shows below are generated on November 2022.
+
+Below is the image comparison of the Dall·E 2 and Dall·E 3 side-by side. _Sorry for the inconsistent image sizes._
+
 ### 1. A realistic image of a boss cat doing work in office
 
-| Dall·E                                                     | Dall·E 3                                                            |
-| ---------------------------------------------------------- | ------------------------------------------------------------------- |
-| ![Boss Cat Dall e 2](https://i.imgur.com/kMCLkUO.png)      | ![Boss Cat Dall·E 3](https://imgur.com/H73oGad.png)                 |
-| Totally unsatisfying, the picture is not realistic at all. | The picture is much more realistic and nicely composed. Also, cute. |
+| Dall·E 2                                                           | Dall·E 3                                                                                 |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| ![Boss Cat Dall e 2](/static/blog/dall-e2-vs-dall-e3/boss-cat.png) | ![Boss Cat Dall·E 3](/static/blog/dall-e2-vs-dall-e3/Image-fK7LnxJH80gANdpFmEWI78j1.png) |
+| Totally unsatisfying, the picture is not realistic at all.         | The picture is much more realistic and nicely composed. Also, cute.                      |
 
 ### 2. A digital art of a lighthouse and with andromeda galaxy at the background
 
-| Dall·E | Dall·E 3 |
-| ------ | -------- |
-|        |          |
-|        |          |
+| Dall·E 2                                                              | Dall·E 3                                                                                                                                                           |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![Lighthouse Dall e 2](/static/blog/dall-e2-vs-dall-e3/ligthouse.png) | ![Lighthouse dalle3](/static/blog/dall-e2-vs-dall-e3/img.png)                                                                                                      |
+| Good, just a bit cartoonish                                           | Satisfied. Nicely composed. But it looks like earth has no atmosphere at all (The galaxy should looks faded, but I assume maybe it uses long focal length setting) |
 
 ### 3. Realistic image of human civilization on Mars
 
-| Dall·E | Dall·E 3 |
-| ------ | -------- |
-|        |          |
-|        |          |
+| Dall·E 2                                                  | Dall·E 3                                                                         |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| ![Mars dall e2](/static/blog/dall-e2-vs-dall-e3/mars.png) | ![3040 dalle3](/static/blog/dall-e2-vs-dall-e3/img-KyPYDoYsPMT4IBLz5z6BuP5a.png) |
+| Ok good enough                                            | Better, have more life                                                           |
 
 ### 4. A depiction of life in year 3040
 
-| Dall·E | Dall·E 3 |
-| ------ | -------- |
-|        |          |
-|        |          |
+| Dall·E 2                                                                                                               | Dall·E 3                                                                         |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| ![3040 dalle2](/static/blog/dall-e2-vs-dall-e3/2020.png)                                                               | ![Dalle3 mars](/static/blog/dall-e2-vs-dall-e3/img-7n6hXihwd5VlNwPBMh6EisMv.png) |
+| Looks stressful, apocalypse like scenario (maybe because this image is generated just after the spike of Covid-19 era) | Future-modern life like depicted in most of my primary school textbooks          |
 
 ### 5. Profile picture with a man and cat in tech environment
 
-| Dall·E | Dall·E 3 |
-| ------ | -------- |
-|        |          |
-|        |          |
+| Dall·E 2                                                               | Dall·E 3                                                                        |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| ![Human Cat Dall e2](/static/blog/dall-e2-vs-dall-e3/pp-human-cat.png) | ![Dalle3 pfp](/static/blog/dall-e2-vs-dall-e3/img-UKNtvU1yyOAU4tzu023GakLs.png) |
+| Good enough, but why the cat is sad though                             | Not composed nicely. The cat looks more realistic than the human.               |
+
+## Bonus
+
+### Malaysia Programmer (Generated via ChatGPT using Dall·E model)
+
+![Scrensht ChatGPT](/static/blog/dall-e2-vs-dall-e3/Screenshot-CHatgpt-programmer-malaya.png)
+
+### Malaysia Prayer time logo for mobile app
+
+![mpt chatgpt logo](/static/blog/dall-e2-vs-dall-e3/mpt-logo.png)
+
+Overall, I think Dall E·3 now are able to generate results that are richer in context and eye-pleasing. For those
+who want to see python script used to generate the image, please refer to GitHub repository [openai-dalle2](https://github.com/iqfareez/openai-dalle2/commits/master)
+& [openai-dall-e3](https://github.com/iqfareez/openai-dall-e3#example-results).
