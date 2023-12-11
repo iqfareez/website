@@ -30,6 +30,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+## Assets
+
+Assets is hosted in many places:
+
+- This project folder itself
+- Imgur
+- Cloudinary
+- etc.
+
 ## Deploy
 
 Deployed on [Vercel](https://vercel.com)
