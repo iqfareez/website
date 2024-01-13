@@ -1,18 +1,21 @@
 ---
 name: Muhammad Fareez Iqmal
 avatar: /static/images/avatar.png
-occupation: Engineering Graduate
-company: International Islamic University Malaysia
+occupation: Software Engineer
+company: Rocket Web Sdn Bhd
 email: m.fareez.iqmal@gmail.com
 twitter: https://twitter.com/iqfareez
 linkedin: https://www.linkedin.com/in/iqfareez
 github: https://github.com/iqfareez
 ---
 
-Fareez is a Mechatronics Engineering graduate from IIUM who is passionate about developing mobile applications, IoT modules, robotics,
-and electronic projects when he has time to spare.
+Fareez is a Mechatronics Engineering graduate from IIUM who is currently working as a software engineer. He is passionate about developing mobile applications, IoT modules, robotics, and electronic projects when he has time to spare.
 
 ## Work experiences
+
+[**Rocket Web**](http://www.rocketweb.my/) | August 2023 - Present
+
+- Software Engineer
 
 [**System Consultancy Services**](http://www.scs.my/) | July 2022 - September 2022
 
@@ -36,9 +39,9 @@ See [projects](../projects)
 
 ## Education
 
-**International Islamic University Malaysia (IIUM)** | June 2018 - present
+**International Islamic University Malaysia (IIUM)** | June 2018 - July 2023
 
-- Bachelor of Engineering [**Mechatronics**](https://www.mtu.edu/mechatronics/what-is/).
+- Graduate in Bachelor of Engineering [**Mechatronics**](https://www.mtu.edu/mechatronics/what-is/).
 - Financial Controller for **Academic and Career Bureau** (Tenure 27).
 - Program Coordinator for **Careers for Engineer (CAFE)** programme.
 - Head of Training Bureau in **IIUM Roboteam** (Tenure 9).

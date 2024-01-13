@@ -3,7 +3,7 @@ const siteMetadata = {
   author: 'iqfareez',
   headerTitle: 'iqfareez',
   description:
-    'Explore my personal website for articles and projects on hardware systems, technologies, and programming. As a Mechatronics Engineering student, I combine technical skills with creativity in my work. Check out my various projects and stay up-to-date on the latest trends.',
+    'Explore my personal website for articles and projects on software engineering, technologies, and programming. As a Mechatronics Engineering graduate and working as a software engineer, I combine technical skills with creativity in my work. Check out my various projects and stay up-to-date on the latest trends.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://iqfareez.com',

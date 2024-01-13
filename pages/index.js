@@ -33,6 +33,7 @@ export default function Home({ posts }) {
             {siteMetadata.description}
           </p>
           <Typewriter
+            className="font-mono"
             options={{
               autoStart: true,
               loop: true,
@@ -44,10 +45,10 @@ export default function Home({ posts }) {
                 .typeString("I'm Fareez Iqmal")
                 .pauseFor(2100)
                 .deleteChars(12)
-                .typeString('an engineering student in mechatronics')
+                .typeString('software engineer')
                 .pauseFor(2100)
-                .deleteChars(37)
-                .typeString(' hobbyist developer')
+                .deleteChars(17)
+                .typeString('also a hobbyist maker')
                 .pauseFor(2100)
                 .deleteAll()
                 .typeString('I love tech')
