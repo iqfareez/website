@@ -1,3 +1,6 @@
+> [!NOTE]  
+> Website is now maintained in https://github.com/iqfareez/websitev2
+
 ![tailwind-nextjs-banner](/public/static/images/twitter-card.png)
 
 # iqfareez Website
